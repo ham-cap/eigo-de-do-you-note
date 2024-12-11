@@ -21,3 +21,6 @@ Style/StringLiterals:
     - "lib/**/*"
     - "test/**/*"
     - "Gemfile"
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
