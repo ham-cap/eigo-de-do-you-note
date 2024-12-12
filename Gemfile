@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop-capybara', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
+  gem 'rspec-rails'
 end
 
 group :development do
