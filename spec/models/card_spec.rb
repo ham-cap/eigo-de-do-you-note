@@ -31,10 +31,20 @@ RSpec.describe Card, type: :model do
     expect(card2.errors[:ja_phrase]).not_to include('has already been taken')
   end
 
-  it 'can share the same Englesh phrase between defferent cards' do
+  it 'can share the same English phrase between defferent cards' do
     card1 = FactoryBot.create(:card)
     card2 = FactoryBot.build(:card, :same_word_in_en_phrase)
     card2.valid?
     expect(card2.errors[:en_phrase]).not_to include('has already been taken')
+  end
+
+  it 'returns Japanese phrase' do
+    card = FactoryBot.create(:card)
+    expect(card.ja_phrase).to eq 'こんにちは 8'
+  end
+
+  it 'returns English phrase' do
+    card = FactoryBot.create(:card)
+    expect(card.en_phrase).to eq 'Hello 7'
   end
 end
