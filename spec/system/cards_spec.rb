@@ -12,9 +12,9 @@ RSpec.describe "Cards", type: :system do
   it 'display a list of cards' do
     visit cards_path
     expect(page).to have_content "Cards#index"
-    expect(page).to have_content "こんにちは 8"
-    expect(page).to have_content "こんにちは 9"
     expect(page).to have_content "こんにちは 10"
+    expect(page).to have_content "こんにちは 11"
+    expect(page).to have_content "こんにちは 12"
     expect(page).to have_content "Hello 8"
     expect(page).to have_content "Hello 9"
     expect(page).to have_content "Hello 10"
