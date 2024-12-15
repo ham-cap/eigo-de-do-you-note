@@ -19,7 +19,7 @@ RSpec.describe Card, type: :model do
 
   it 'does not allow duplicate combinations of ja_phrase and en_phrase' do
     card1 = FactoryBot.create(:card)
-    card2 = FactoryBot.build(:card)
+    card2 = FactoryBot.build(:card, :has_the_same_combination)
     card2.valid?
     expect(card2.errors[:ja_phrase]).to include('has already been taken')
   end
