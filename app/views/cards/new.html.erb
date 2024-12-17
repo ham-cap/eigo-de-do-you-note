@@ -1,7 +1,7 @@
 <h1>新規作成</h1>
 <%= form_with model: @card do |form| %>
-  <%= form.label :ja_phrase, '気になるフレーズ' %>
-  <%= form.text_area :ja_phrase, id: 'new_text' %>
+  <%= form.label :original_text, '気になるフレーズ' %>
+  <%= form.text_area :original_text, id: 'original_text' %>
   <div>
     <%= form.submit '翻訳する' %>
   </div>

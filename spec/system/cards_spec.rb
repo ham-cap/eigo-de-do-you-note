@@ -23,7 +23,7 @@ RSpec.describe "Cards", type: :system do
   it 'creates a new card' do
     visit new_card_path
     expect(page).to have_content '新規作成'
-    fill_in 'new_text', with: '本日は晴天なり'
+    fill_in 'original_text', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content 'Cards#index'
     expect(page).to have_content '本日は晴天なり'
