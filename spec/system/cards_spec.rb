@@ -38,4 +38,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'こんにちは 19'
     expect(page).to have_content 'Hello 17'
   end
+
+  it 'deletes a card' do
+    card = FactoryBot.create(:card)
+
+    visit card_path(card)
+    click_on '削除する'
+    expect(page.accept_confirm).to eq "本当に削除しますか？"
+    expect(page).to have_content 'Cards#index'
+    expect(page).not_to have_content 'こんにちは 23'
+    expect(page).not_to have_content 'Hello 21'
+  end
 end
