@@ -29,4 +29,13 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content '本日は晴天なり'
     expect(page).to have_content 'testing a microphone'
   end
+
+  it 'display a details page of cards' do
+    card = FactoryBot.create(:card)
+
+    visit card_path(card)
+    expect(page).to have_content 'Cards#show'
+    expect(page).to have_content 'こんにちは 19'
+    expect(page).to have_content 'Hello 17'
+  end
 end
