@@ -19,4 +19,14 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content "Hello 9"
     expect(page).to have_content "Hello 10"
   end
+
+  it 'creates a new card' do
+    visit new_card_path
+    expect(page).to have_content '新規作成'
+    fill_in 'original_text', with: '本日は晴天なり'
+    click_on '翻訳する'
+    expect(page).to have_content 'Cards#index'
+    expect(page).to have_content '本日は晴天なり'
+    expect(page).to have_content 'testing a microphone'
+  end
 end
