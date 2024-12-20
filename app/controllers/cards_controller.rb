@@ -35,6 +35,14 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
   end
 
+  def destroy
+    @card = Card.find(params[:id])
+    @card.destroy
+    respond_to do |format|
+      format.html { redirect_to cards_path, notice: '削除しました', status: :see_other }
+    end
+  end
+
   private
 
   def card_params

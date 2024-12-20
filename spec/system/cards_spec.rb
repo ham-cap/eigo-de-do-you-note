@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Cards", type: :system do
   before do
-    driven_by(:rack_test)
     @cards = []
     3.times do
       @cards << FactoryBot.create(:card)
@@ -37,5 +36,17 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'Cards#show'
     expect(page).to have_content 'こんにちは 19'
     expect(page).to have_content 'Hello 17'
+  end
+
+  it 'deletes a card', :js do
+    card = FactoryBot.create(:card)
+
+    visit card_path(card)
+    accept_confirm "本当に削除しますか？" do
+      click_on '削除する'
+    end
+    expect(page).to have_content 'Cards#index'
+    expect(page).not_to have_content 'こんにちは 23'
+    expect(page).not_to have_content 'Hello 21'
   end
 end
