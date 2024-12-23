@@ -43,11 +43,28 @@ class CardsController < ApplicationController
     end
   end
 
+  def edit
+    @card = Card.find(params[:id])
+  end
+
+  def update
+    @card = Card.find(params[:id])
+    if @card.update(card_params)
+      respond_to do |format|
+        format.html { redirect_to cards_path, notice: 'Card was successfully updated.' }
+      end
+    else
+      render :edit
+    end
+  end
+
   private
 
   def card_params
     params.require(:card).permit(
       :original_text,
+      :ja_phrase,
+      :en_phrase,
       :memorized_at
     )
   end

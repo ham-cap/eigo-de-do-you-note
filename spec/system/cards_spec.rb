@@ -22,7 +22,7 @@ RSpec.describe "Cards", type: :system do
   it 'creates a new card' do
     visit new_card_path
     expect(page).to have_content '新規作成'
-    fill_in 'original_text', with: '本日は晴天なり'
+    fill_in '気になるフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content 'Cards#index'
     expect(page).to have_content '本日は晴天なり'
@@ -48,5 +48,20 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'Cards#index'
     expect(page).not_to have_content 'こんにちは 23'
     expect(page).not_to have_content 'Hello 21'
+  end
+
+  it 'updates a card' do
+    card = FactoryBot.create(:card)
+
+    visit cards_path
+    expect(page).to have_content "Cards#index"
+
+    click_on '編集する', match: :first
+    fill_in '日本語', with: 'カードを更新した'
+    fill_in '英語', with: 'Updated card'
+    click_on '更新する'
+    expect(page).to have_content 'Cards#index'
+    expect(page).to have_content 'カードを更新した'
+    expect(page).to have_content 'Updated card'
   end
 end
