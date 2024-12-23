@@ -1,0 +1,10 @@
+<h1>編集</h1>
+<%= form_with model: @card do |form| %>
+  <%= form.label :ja_phrase, '日本語' %>
+  <%= form.text_area :ja_phrase %>
+  <%= form.label :en_phrase, '英語' %>
+  <%= form.text_area :en_phrase %>
+  <div>
+    <%= form.submit '更新する' %>
+  </div>
+<% end %>
