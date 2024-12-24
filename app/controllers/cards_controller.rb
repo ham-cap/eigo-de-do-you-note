@@ -58,6 +58,18 @@ class CardsController < ApplicationController
     end
   end
 
+  def review
+    cards = Card.unmemorized
+    if params[:id]
+      @card = Card.find(params[:id])
+      @next_card = cards.where('id > ?', @card.id).first
+      @previous_card = cards.where('id < ?', @card.id).last
+    else
+      @card = cards.first
+      @next_card = cards.second
+    end
+  end
+
   private
 
   def card_params

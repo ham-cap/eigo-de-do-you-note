@@ -64,4 +64,22 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'カードを更新した'
     expect(page).to have_content 'Updated card'
   end
+
+  it 'can review unmemorized cards in review mode' do
+    unmemorized_card1 = FactoryBot.create(:card, :unmemorized1)
+    unmemorized_card2 = FactoryBot.create(:card, :unmemorized2)
+
+    visit review_cards_path
+    expect(page).to have_content '復習モード'
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).to have_content 'I haven\'t memorized it yet.'
+    click_on '次のカードへ'
+    expect(page).to have_content '復習モード'
+    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
+    click_on '前のカードへ'
+    expect(page).to have_content '復習モード'
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).to have_content 'I haven\'t memorized it yet.'
+  end
 end
