@@ -24,5 +24,17 @@ FactoryBot.define do
       ja_phrase { 'こんにちは 3' }
       en_phrase { 'Hello 3' }
     end
+
+    trait :unmemorized1 do
+      ja_phrase { 'まだ暗記できていない' }
+      en_phrase { 'I haven\'t memorized it yet.' }
+      memorized_at { nil }
+    end
+
+    trait :unmemorized2 do
+      ja_phrase { 'もう少し。でも、まだ暗記できていない' }
+      en_phrase { 'Almost there. But I haven\'t memorized it yet.' }
+      memorized_at { nil }
+    end
   end
 end

@@ -1,0 +1,15 @@
+<div data-controller="review">
+  <h1 class="font-bold text-4xl">復習モード</h1>
+  <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility">英文を表示する</button>
+  <p>和文：<%= @card.ja_phrase %></p>
+  <p data-review-target="enPhrase" style="display: none">英文：<%= @card.en_phrase %></p>
+  <%= link_to '削除する', card_path(@card), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+  <% if @next_card %>
+    <%= link_to '次のカードへ', review_cards_path(id: @next_card.id) %>
+  <% end %>
+
+  <% if @previous_card %>
+    <%= link_to '前のカードへ', review_cards_path(id: @previous_card.id) %>
+  <% end %>
+</div>
+
