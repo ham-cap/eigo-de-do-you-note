@@ -72,14 +72,18 @@ RSpec.describe "Cards", type: :system do
     visit review_cards_path
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'まだ暗記できていない'
+    expect(page).not_to have_content 'I haven\'t memorized it yet.'
+    click_on '英文を表示する'
     expect(page).to have_content 'I haven\'t memorized it yet.'
+    click_on '英文を隠す'
+    expect(page).not_to have_content 'I haven\'t memorized it yet.'
     click_on '次のカードへ'
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
+    expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
     click_on '前のカードへ'
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'まだ暗記できていない'
-    expect(page).to have_content 'I haven\'t memorized it yet.'
+    expect(page).not_to have_content 'I haven\'t memorized it yet.'
   end
 end
