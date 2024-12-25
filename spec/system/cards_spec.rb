@@ -71,19 +71,32 @@ RSpec.describe "Cards", type: :system do
 
     visit review_cards_path
     expect(page).to have_content '復習モード'
-    expect(page).to have_content 'まだ暗記できていない'
-    expect(page).not_to have_content 'I haven\'t memorized it yet.'
+    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
     click_on '英文を表示する'
     expect(page).to have_content 'I haven\'t memorized it yet.'
     click_on '英文を隠す'
     expect(page).not_to have_content 'I haven\'t memorized it yet.'
     click_on '次のカードへ'
     expect(page).to have_content '復習モード'
-    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).not_to have_content 'I haven\'t memorized it yet.'
     click_on '前のカードへ'
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content 'I haven\'t memorized it yet.'
+  end
+
+  it 'a memorized button removes card from review mode' do
+    card = FactoryBot.create(:card, :unmemorized1)
+    card2 = FactoryBot.create(:card, :unmemorized2)
+    visit cards_path
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).to have_content 'I haven\'t memorized it yet.'
+    click_on '覚えた！', match: :first
+    visit review_cards_path
+    expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).not_to have_content '次のカードへ'
   end
 end

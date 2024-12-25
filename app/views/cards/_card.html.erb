@@ -1,4 +1,11 @@
-<p>和文：<%= link_to card.ja_phrase, card_path(card) %></p>
-<p>英文：<%= link_to card.en_phrase, card_path(card) %></p>
-<%= link_to '編集する', edit_card_path(card) %>
-<p>----------------------------------------------</p>
+<div data-controller="memorized-button">
+  <p>和文：<%= link_to card.ja_phrase, card_path(card) %></p>
+  <p>英文：<%= link_to card.en_phrase, card_path(card) %></p>
+  <%= link_to '編集する', edit_card_path(card) %>
+  <%= link_to card.memorized_at.nil? ? '覚えた！' : '忘れた！',
+              update_memorized_status_card_path(card),
+              data: { turbo_method: :patch,
+                      memorized_button_target: 'memorizedButton',
+                      action: 'click->memorized-button#switchText' } %>
+  <p>----------------------------------------------</p>
+</div>

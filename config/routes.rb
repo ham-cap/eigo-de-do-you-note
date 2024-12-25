@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :cards do
     get 'review', on: :collection
+    member do
+      patch :update_memorized_status
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
