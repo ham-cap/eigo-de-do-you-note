@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.all
+    @cards = Card.all.order(created_at: :desc)
   end
 
   def new
@@ -59,14 +59,23 @@ class CardsController < ApplicationController
   end
 
   def review
-    cards = Card.unmemorized
+    cards = Card.unmemorized.order(created_at: :desc)
     if params[:id]
       @card = Card.find(params[:id])
-      @next_card = cards.where('id > ?', @card.id).first
-      @previous_card = cards.where('id < ?', @card.id).last
+      @next_card = cards.where('id < ?', @card.id).first
+      @previous_card = cards.where('id > ?', @card.id).last
     else
       @card = cards.first
       @next_card = cards.second
+    end
+  end
+
+  def update_memorized_status
+    @card = Card.find(params[:id])
+    if @card.memorized_at.nil?
+      @card.update(memorized_at: Time.current)
+    else
+      @card.update(memorized_at: nil)
     end
   end
 
