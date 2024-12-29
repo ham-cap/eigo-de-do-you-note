@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend 'cards', partial: 'cards/card', locals: { card: @card } %>
+<%= turbo_stream.update Card.new, '' %>

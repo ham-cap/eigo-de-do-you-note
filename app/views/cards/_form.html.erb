@@ -1,0 +1,10 @@
+<%= form_with model: card do |form| %>
+  <%= form.label :original_text, '気になるフレーズ' %>
+  <%= form.text_area :original_text %>
+  <% @card.errors.full_messages_for(:ja_phrase).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+  <div>
+    <%= form.submit '翻訳する' %>
+  </div>
+<% end %>

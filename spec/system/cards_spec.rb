@@ -20,8 +20,9 @@ RSpec.describe "Cards", type: :system do
   end
 
   it 'creates a new card' do
-    visit new_card_path
-    expect(page).to have_content '新規作成'
+    visit cards_path
+    expect(page).to have_content 'Cards#index'
+    click_on '新規作成'
     fill_in '気になるフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content 'Cards#index'
@@ -32,7 +33,13 @@ RSpec.describe "Cards", type: :system do
   it 'display a details page of cards' do
     card = FactoryBot.create(:card)
 
-    visit card_path(card)
+    visit cards_path
+    click_on card.ja_phrase
+    expect(page).to have_content 'Cards#show'
+    expect(page).to have_content 'こんにちは 19'
+    expect(page).to have_content 'Hello 17'
+    visit cards_path
+    click_on card.en_phrase
     expect(page).to have_content 'Cards#show'
     expect(page).to have_content 'こんにちは 19'
     expect(page).to have_content 'Hello 17'
