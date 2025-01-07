@@ -4,7 +4,7 @@ class CardsController < ApplicationController
     @cards =
       if params[:search_terms]
         target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
-        Card.where("#{target_column} LIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
+        Card.where("#{target_column} ILIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
       else
         Card.all.order(created_at: :desc)
       end
