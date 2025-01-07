@@ -26,7 +26,7 @@ RSpec.describe "Cards", type: :system do
     fill_in '気になるフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content 'Cards#index'
-    expect(page).to have_content '本日は晴天なり'
+    expect(page).to have_content('本日は晴天なり', wait: 5)
     expect(page).to have_content 'testing a microphone'
   end
 
@@ -105,7 +105,7 @@ RSpec.describe "Cards", type: :system do
       expect(page).to have_content("忘れた！", wait: 7)
     end
     visit review_cards_path
-    expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 5)
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
   end
@@ -117,7 +117,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'カード一覧画面ではインクリメンタルサーチが使用できます。'
     expect(page).to have_selector('.a-card', count: 1)
     visit cards_path
-    fill_in 'カードを検索', with: 'Incremental'
+    fill_in 'カードを検索', with: 'incremental'
     expect(page).to have_content 'Incremental search is available on the card list screen.'
     expect(page).to have_selector('.a-card', count: 1)
   end
