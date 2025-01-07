@@ -1,6 +1,14 @@
 class CardsController < ApplicationController
   def index
-    @cards = Card.all.order(created_at: :desc)
+    # @cards = Card.all.order(created_at: :desc)
+    @cards =
+      if params[:search_terms]
+        target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
+        Card.where("#{target_column} LIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
+      else
+        Card.all.order(created_at: :desc)
+      end
+    @search_terms = params[:search_terms]
   end
 
   def new

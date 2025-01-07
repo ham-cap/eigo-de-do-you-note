@@ -109,4 +109,16 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
   end
+
+  it 'can be searched incrementally', :js do
+    card = FactoryBot.create(:card, :for_incremental_search_test)
+    visit cards_path
+    fill_in 'カードを検索', with: 'インクリメンタル'
+    expect(page).to have_content 'カード一覧画面ではインクリメンタルサーチが使用できます。'
+    expect(page).to have_selector('.a-card', count: 1)
+    visit cards_path
+    fill_in 'カードを検索', with: 'Incremental'
+    expect(page).to have_content 'Incremental search is available on the card list screen.'
+    expect(page).to have_selector('.a-card', count: 1)
+  end
 end

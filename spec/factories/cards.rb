@@ -36,5 +36,11 @@ FactoryBot.define do
       en_phrase { 'Almost there. But I haven\'t memorized it yet.' }
       memorized_at { nil }
     end
+
+    trait :for_incremental_search_test do
+      ja_phrase { 'カード一覧画面ではインクリメンタルサーチが使用できます。' }
+      en_phrase { 'Incremental search is available on the card list screen.' }
+      memorized_at { nil }
+    end
   end
 end
