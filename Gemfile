@@ -21,6 +21,7 @@ gem 'deepl-rb', require: 'deepl'
 
 gem 'cld'
 
+gem 'kaminari'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
