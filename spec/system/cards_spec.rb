@@ -133,4 +133,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content memorized_card.ja_phrase
     expect(page).to have_content unmemorized_card.ja_phrase
   end
+
+  it 'can use pagination in card list', :js do
+    n = 1
+    26.times do
+      FactoryBot.create(:card, ja_phrase: "カード #{n}")
+      n += 1
+    end
+    visit cards_path
+    click_on 'Next ›', match: :first
+    expect(page).to have_content('カード 1', wait: 10)
+  end
 end
