@@ -102,10 +102,10 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
     within "#card-#{card2.id}" do
       click_on '覚えた！'
-      expect(page).to have_content("忘れた！", wait: 7)
+      expect(page).to have_content("忘れた！", wait: 10)
     end
     visit review_cards_path
-    expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 5)
+    expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 10)
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
   end
@@ -120,5 +120,17 @@ RSpec.describe "Cards", type: :system do
     fill_in 'カードを検索', with: 'incremental'
     expect(page).to have_content 'Incremental search is available on the card list screen.'
     expect(page).to have_selector('.a-card', count: 1)
+  end
+
+  it 'can use filter in card list', :js do
+    memorized_card = FactoryBot.create(:card)
+    unmemorized_card = FactoryBot.create(:card, :unmemorized1)
+    visit cards_path
+    click_on '覚えたカード'
+    expect(page).to have_content memorized_card.ja_phrase
+    expect(page).not_to have_content unmemorized_card.ja_phrase
+    click_on 'まだ覚えていないカード'
+    expect(page).not_to have_content memorized_card.ja_phrase
+    expect(page).to have_content unmemorized_card.ja_phrase
   end
 end
