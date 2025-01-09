@@ -1,13 +1,22 @@
 class CardsController < ApplicationController
   def index
-    # @cards = Card.all.order(created_at: :desc)
+    @target = params[:target]
+    @target = 'all' unless target_allowlist.include?(@target)
+
     @cards =
-      if params[:search_terms]
-        target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
-        Card.where("#{target_column} ILIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
+      case @target
+      when 'memorized'
+        Card.memorized.order(created_at: :desc)
+      when 'unmemorized'
+        Card.unmemorized.order(created_at: :desc)
       else
         Card.all.order(created_at: :desc)
       end
+
+    if params[:search_terms]
+      target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
+      @cards = @cards.where("#{target_column} ILIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
+    end
     @search_terms = params[:search_terms]
   end
 
@@ -97,5 +106,9 @@ class CardsController < ApplicationController
       :en_phrase,
       :memorized_at
     )
+  end
+
+  def target_allowlist
+    target_allowlist = %w[all memorized unmemorized]
   end
 end

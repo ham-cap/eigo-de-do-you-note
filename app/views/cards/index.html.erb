@@ -1,6 +1,20 @@
 <div>
   <h1 class="font-bold text-4xl">Cards#index</h1>
+  <nav>
+    <ul>
+      <li>
+        <%= link_to '全て', cards_path(target: 'all') %>
+      </li>
+      <li>
+        <%= link_to '覚えたカード', cards_path(target: 'memorized') %>
+      </li>
+      <li>
+        <%= link_to 'まだ覚えていないカード', cards_path(target: 'unmemorized') %>
+      </li>
+    </ul>
+  </nav>
   <%= form_with url: cards_path, method: :get, html: { data: { turbo_frame: "cards", controller: "search-form", action: "input->search-form#submit" } } do |form| %>
+    <%= form.hidden_field :target, value: @target %>
     <%= form.label :search_terms, 'カードを検索' %>
     <%= form.text_field :search_terms, autocomplete: :off %>
     <%= form.submit "検索", name: nil %>
