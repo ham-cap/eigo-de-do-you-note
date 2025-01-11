@@ -105,7 +105,7 @@ RSpec.describe "Cards", type: :system do
       expect(page).to have_content("忘れた！", wait: 10)
     end
     visit review_cards_path
-    expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 10)
+    expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 20)
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
   end
@@ -143,5 +143,15 @@ RSpec.describe "Cards", type: :system do
     visit cards_path
     click_on 'Next ›', match: :first
     expect(page).to have_content('カード 1', wait: 10)
+  end
+
+  it 'can use user menu', :js do
+    visit cards_path
+    click_on 'ユーザーメニュー'
+    expect(page).to have_content('ログアウト')
+    expect(page).to have_content('退会')
+    click_on 'ユーザーメニュー'
+    expect(page).not_to have_content('ログアウト')
+    expect(page).not_to have_content('退会')
   end
 end

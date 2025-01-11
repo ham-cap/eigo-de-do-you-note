@@ -1,0 +1,17 @@
+<li class="header-links__item">
+  <div data-controller="header-user-menu">
+    <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
+      <div class="header-current-user">
+        <span class="a-user-role is-#{current_user.primary_role}">
+          <%= image_tag 'test_user_icon', title: 'test_user_icon', class: 'header-current-user__icon a-user-icon is-xs' %>
+        </span>
+      </div>
+      <span class="header-links__link-label">ユーザーメニュー</span>
+      <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
+        <div class="header-dropdown__inner">
+          <%= render 'application/header/user_menu' %>
+        </div>
+      </div>
+    </button>
+  </div>
+</li>
