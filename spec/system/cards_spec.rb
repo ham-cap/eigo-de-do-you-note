@@ -154,4 +154,12 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content('ログアウト')
     expect(page).not_to have_content('退会')
   end
+
+  it 'can move to top page from footer link', :js do
+    card = FactoryBot.create(:card)
+    visit card_path(card)
+    expect(page).to have_content('トップページ')
+    click_on 'トップページ'
+    expect(page).to have_content "Cards#index"
+  end
 end
