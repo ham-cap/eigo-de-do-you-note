@@ -43,3 +43,11 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.spinner {
+  display: none;
+}
+
+.spinner.is-visible {
+  display: block;
+}

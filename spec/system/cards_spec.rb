@@ -162,4 +162,15 @@ RSpec.describe "Cards", type: :system do
     click_on 'トップページ'
     expect(page).to have_content "Cards#index"
   end
+
+  it 'spinner show up while card creation', :js do
+    visit cards_path
+    click_on '新規作成'
+    fill_in '気になるフレーズ', with: '本日は晴天なり'
+    click_on '翻訳する'
+    expect(page).to have_content('Now translating...')
+    expect(page).to have_selector('.spinner')
+    expect(page).to have_content('本日は晴天なり', wait: 5)
+    expect(page).to have_content 'testing a microphone'
+  end
 end
