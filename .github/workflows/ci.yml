@@ -82,6 +82,9 @@ jobs:
         run: |
           bin/rails db:setup
 
+      - name: Assets precompile
+        run: |
+          bundle exec rake assets:precompile
       - name: Run RSpec tests
         run: |
           bundle exec rspec
