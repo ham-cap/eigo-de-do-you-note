@@ -84,4 +84,4 @@ jobs:
 
       - name: Run RSpec tests
         run: |
-          bin/rspec
+          bundle exec rspec
