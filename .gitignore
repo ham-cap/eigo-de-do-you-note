@@ -37,6 +37,4 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
-/.github
-
 /node_modules
