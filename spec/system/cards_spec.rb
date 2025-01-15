@@ -8,7 +8,7 @@ RSpec.describe "Cards", type: :system do
     end
   end
 
-  it 'display a list of cards' do
+  it 'display a list of cards', :js do
     visit cards_path
     expect(page).to have_content "Cards#index"
     expect(page).to have_content "こんにちは 10"
@@ -19,7 +19,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content "Hello 10"
   end
 
-  it 'creates a new card' do
+  it 'creates a new card', :js do
     visit cards_path
     expect(page).to have_content 'Cards#index'
     click_on '新規作成'
@@ -30,7 +30,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('testing a microphone', wait: 10)
   end
 
-  it 'display a details page of cards' do
+  it 'display a details page of cards', :js do
     card = FactoryBot.create(:card)
 
     visit cards_path
@@ -57,7 +57,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content 'Hello 21'
   end
 
-  it 'updates a card' do
+  it 'updates a card', :js do
     card = FactoryBot.create(:card)
 
     visit cards_path
