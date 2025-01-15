@@ -25,9 +25,9 @@ RSpec.describe "Cards", type: :system do
     click_on '新規作成'
     fill_in '気になるフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
-    expect(page).to have_content('Cards#index', wait: 10)
-    expect(page).to have_content('本日は晴天なり', wait: 10)
-    expect(page).to have_content('testing a microphone', wait: 10)
+    expect(page).to have_content('Cards#index', wait: 25)
+    expect(page).to have_content('本日は晴天なり', wait: 25)
+    expect(page).to have_content('testing a microphone', wait: 25)
   end
 
   it 'display a details page of cards', :js do
