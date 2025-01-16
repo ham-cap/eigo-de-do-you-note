@@ -26,7 +26,7 @@
   </div>
   <%= turbo_frame_tag Card.new %>
   <%= turbo_frame_tag 'cards' do %>
-    <%= render partial: 'card', collection: @cards %>
+    <%= render partial: @cards %>
   <% end %>
   <%= paginate @cards %>
 </div>
