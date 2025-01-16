@@ -13,8 +13,9 @@ class CardsController < ApplicationController
         Card.all.order(created_at: :desc)
       end
 
-    if params[:search_terms]
-      target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
+    allowed_target_columns = ['ja_phrase', 'en_phrase']
+    target_column = CLD.detect_language(params[:search_terms])[:code] == 'ja' ? 'ja_phrase' : 'en_phrase'
+    if allowed_target_columns.include?(target_column)
       @cards = @cards.where("#{target_column} ILIKE ?", "%#{params[:search_terms]}%").order(created_at: :desc)
     end
     @cards = @cards.page(params[:page])
