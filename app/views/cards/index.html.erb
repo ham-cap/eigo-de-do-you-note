@@ -22,11 +22,11 @@
   <%= paginate @cards %>
   <%= link_to '新規作成', new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
   <div>
-    <%= link_to '復習モードへ', review_cards_path %>
+    <%= link_to '復習モードへ', review_cards_path, data: { turbo_prefetch: false } %>
   </div>
   <%= turbo_frame_tag Card.new %>
   <%= turbo_frame_tag 'cards' do %>
-    <%= render @cards %>
+    <%= render partial: 'card', collection: @cards %>
   <% end %>
   <%= paginate @cards %>
 </div>
