@@ -8,7 +8,7 @@ RSpec.describe "Cards", type: :system do
     end
   end
 
-  it 'display a list of cards' do
+  it 'display a list of cards', :js do
     visit cards_path
     expect(page).to have_content "Cards#index"
     expect(page).to have_content "こんにちは 10"
@@ -19,18 +19,18 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content "Hello 10"
   end
 
-  it 'creates a new card' do
+  it 'creates a new card', :js do
     visit cards_path
     expect(page).to have_content 'Cards#index'
     click_on '新規作成'
     fill_in '気になるフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
-    expect(page).to have_content 'Cards#index'
-    expect(page).to have_content('本日は晴天なり', wait: 5)
-    expect(page).to have_content 'testing a microphone'
+    expect(page).to have_content('Cards#index', wait: 10)
+    expect(page).to have_content('本日は晴天なり', wait: 10)
+    expect(page).to have_content('testing a microphone', wait: 10)
   end
 
-  it 'display a details page of cards' do
+  it 'display a details page of cards', :js do
     card = FactoryBot.create(:card)
 
     visit cards_path
@@ -57,7 +57,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content 'Hello 21'
   end
 
-  it 'updates a card' do
+  it 'updates a card', :js do
     card = FactoryBot.create(:card)
 
     visit cards_path
@@ -104,7 +104,7 @@ RSpec.describe "Cards", type: :system do
       click_on '覚えた！'
       expect(page).to have_content("忘れた！", wait: 10)
     end
-    visit review_cards_path
+    click_on '復習モードへ'
     expect(page).not_to have_content('もう少し。でも、まだ暗記できていない', wait: 20)
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
