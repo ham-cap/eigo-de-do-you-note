@@ -1,4 +1,6 @@
 class Card < ApplicationRecord
+  belongs_to :user
+
   validates :ja_phrase, presence: true
   validates :en_phrase, presence: true
   validates :ja_phrase, uniqueness: { scope: :en_phrase }
