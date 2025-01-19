@@ -2,9 +2,14 @@
   <div data-controller="header-user-menu">
     <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
       <div class="header-current-user">
-        <span class="a-user-role is-#{current_user.primary_role}">
-          <%= image_tag 'test_user_icon', title: 'test_user_icon', class: 'header-current-user__icon a-user-icon is-xs' %>
-        </span>
+        <% if current_user %>
+          <%= image_tag current_user.image, title: 'user_icon', class: 'header-current-user__icon a-user-icon is-xs' %>
+          <%= current_user.name %>さん
+          <%= link_to "ログアウト", log_out_path %>
+        <% else  %>
+          ゲストさん
+          <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
+        <% end %>
       </div>
       <span class="header-links__link-label">ユーザーメニュー</span>
       <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">

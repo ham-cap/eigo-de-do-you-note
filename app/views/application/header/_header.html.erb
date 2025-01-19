@@ -6,14 +6,6 @@
           <%= image_tag('card_icon.jpg', alt: 'ロゴ', class: 'header__title-image') %>
         </a>
       </div>
-      <% if current_user %>
-        <%= image_tag current_user.image %>
-        <%= current_user.name %>さん
-        <%= link_to "ログアウト", log_out_path %>
-      <% else  %>
-        ゲストさん
-        <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
-      <% end %>
       <div class="header__end">
         <%= render 'application/header/header_links' %>
       </div>
