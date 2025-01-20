@@ -22,7 +22,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Card.new
+    @card = current_user.cards.build
   end
 
   def create
