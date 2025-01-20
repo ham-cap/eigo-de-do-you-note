@@ -35,9 +35,9 @@ class CardsController < ApplicationController
     translation = DeepL.translate original_text, nil, inputted_lang[:code] == 'ja' ? 'EN' : 'JA'
 
     if inputted_lang[:code] == 'ja'
-      @card = Card.new(ja_phrase: original_text, en_phrase: translation)
+      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation)
     else
-      @card = Card.new(ja_phrase: translation, en_phrase: original_text)
+      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text)
     end
 
     if @card.save
