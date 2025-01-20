@@ -6,11 +6,11 @@ class CardsController < ApplicationController
     @cards =
       case @target
       when 'memorized'
-        Card.memorized.order(created_at: :desc)
+        current_user.cards.memorized.order(created_at: :desc)
       when 'unmemorized'
-        Card.unmemorized.order(created_at: :desc)
+        current_user.cards.unmemorized.order(created_at: :desc)
       else
-        Card.all.order(created_at: :desc)
+        current_user.cards.order(created_at: :desc)
       end
 
     if params[:search_terms]
