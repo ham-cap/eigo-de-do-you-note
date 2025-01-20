@@ -1,4 +1,8 @@
 class CardsController < ApplicationController
+  before_action :authenticate
+  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+
   def index
     @target = params[:target]
     @target = 'all' unless target_allowlist.include?(@target)
@@ -111,5 +115,15 @@ class CardsController < ApplicationController
 
   def target_allowlist
     target_allowlist = %w[all memorized unmemorized]
+  end
+
+  def set_card
+    @card = Card.find(params[:id])
+  end
+
+  def authorize_user
+    unless @card.user_id == current_user.id
+      redirect_to cards_path, alert: 'アクセス権がありません'
+    end
   end
 end
