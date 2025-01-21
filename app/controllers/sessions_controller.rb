@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to home_index_path, notice: 'ログアウトしました'
+    redirect_to root_path, notice: 'ログアウトしました'
   end
 
   private
