@@ -19,7 +19,7 @@ class User < ApplicationRecord
       {
         name: auth_hash.info.name,
         email: auth_hash.info.email,
-        image: auth_hash.info.image,
+        image: auth_hash.info.image ? auth_hash.info.image : '/images/test_user_icon.jpg',
         provider: auth_hash.provider,
         uid: auth_hash.uid
       }
