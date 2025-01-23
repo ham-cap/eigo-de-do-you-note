@@ -5,7 +5,7 @@
         <% if current_user %>
           <%= image_tag current_user.image, title: 'user_icon', class: 'header-current-user__icon a-user-icon is-xs' %>
           <%= current_user.name %>さん
-          <%= link_to "ログアウト", log_out_path %>
+          <%= link_to "ログアウト", log_out_path, class: 'logout-button', data: { turbo_prefetch: false } %>
         <% else  %>
           ゲストさん
           <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
