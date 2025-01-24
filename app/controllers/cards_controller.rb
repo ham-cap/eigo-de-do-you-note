@@ -1,4 +1,8 @@
 class CardsController < ApplicationController
+  before_action :authenticate
+  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
+
   def index
     @target = params[:target]
     @target = 'all' unless target_allowlist.include?(@target)
@@ -6,11 +10,11 @@ class CardsController < ApplicationController
     @cards =
       case @target
       when 'memorized'
-        Card.memorized.order(created_at: :desc)
+        current_user.cards.memorized.order(created_at: :desc)
       when 'unmemorized'
-        Card.unmemorized.order(created_at: :desc)
+        current_user.cards.unmemorized.order(created_at: :desc)
       else
-        Card.all.order(created_at: :desc)
+        current_user.cards.order(created_at: :desc)
       end
 
     if params[:search_terms]
@@ -22,7 +26,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Card.new
+    @card = current_user.cards.build
   end
 
   def create
@@ -35,9 +39,9 @@ class CardsController < ApplicationController
     translation = DeepL.translate original_text, nil, inputted_lang[:code] == 'ja' ? 'EN' : 'JA'
 
     if inputted_lang[:code] == 'ja'
-      @card = Card.new(ja_phrase: original_text, en_phrase: translation)
+      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation)
     else
-      @card = Card.new(ja_phrase: translation, en_phrase: original_text)
+      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text)
     end
 
     if @card.save
@@ -111,5 +115,15 @@ class CardsController < ApplicationController
 
   def target_allowlist
     target_allowlist = %w[all memorized unmemorized]
+  end
+
+  def set_card
+    @card = Card.find(params[:id])
+  end
+
+  def authorize_user
+    unless @card.user_id == current_user.id
+      redirect_to cards_path, alert: 'アクセス権がありません'
+    end
   end
 end

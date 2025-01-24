@@ -21,6 +21,10 @@ gem 'deepl-rb', require: 'deepl'
 
 gem 'cld'
 
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-rails_csrf_protection'
+
 gem 'kaminari'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -61,4 +65,5 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'launchy'
 end
