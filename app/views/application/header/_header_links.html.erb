@@ -9,7 +9,7 @@
       </div>
     <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
       <% if current_user %>
-        <%= image_tag 'hamburger_menu_icon.png', title: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
+        <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
         <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
           <div class="header-dropdown__inner">
             <%= render 'application/header/user_menu' %>
