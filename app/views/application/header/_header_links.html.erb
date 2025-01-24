@@ -1,18 +1,15 @@
 <li class="header-links__item">
   <div data-controller="header-user-menu">
-    <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
       <div class="header-current-user">
         <% if current_user %>
           <%= image_tag current_user.image, title: 'user_icon', class: 'header-current-user__icon a-user-icon is-xs' %>
-          <%= current_user.name %>さん
-          <%= link_to "ログアウト", log_out_path, class: 'logout-button', data: { turbo_prefetch: false } %>
         <% else  %>
-          ゲストさん
           <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
         <% end %>
       </div>
+    <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
       <% if current_user %>
-        <span class="header-links__link-label">ユーザーメニュー</span>
+        <%= image_tag 'hamburger_menu_icon.png', title: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
         <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
           <div class="header-dropdown__inner">
             <%= render 'application/header/user_menu' %>
