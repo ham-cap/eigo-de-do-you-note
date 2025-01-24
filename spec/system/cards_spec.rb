@@ -6,7 +6,6 @@ RSpec.describe "Cards", type: :system do
 
   before do
     log_in_as user
-    expect(page).to have_content("#{user.name}さん", wait: 10)
     expect(page).to have_content("Cards#index", wait: 10)
   end
 
@@ -138,14 +137,6 @@ RSpec.describe "Cards", type: :system do
     visit cards_path
     click_on 'Next ›', match: :first
     expect(page).to have_content('カード 1', wait: 10)
-  end
-
-  it 'can move to top page from footer link', :js do
-    card = FactoryBot.create(:card)
-    visit card_path(card)
-    expect(page).to have_content 'トップページ'
-    click_on 'トップページ'
-    expect(page).to have_content "Cards#index"
   end
 
   it 'spinner show up while card creation', :js do

@@ -53,3 +53,8 @@
 .spinner.is-visible {
   display: block;
 }
+
+.hamburger_menu_icon {
+  width: 40px;
+  height: 40px;
+}
