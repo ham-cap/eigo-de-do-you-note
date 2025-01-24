@@ -5,16 +5,22 @@ export default class extends Controller {
   static targets = ["headerUserMenu"];
 
   connect() {
-    document.addEventListener("click", this.handleOutsideClick.bind(this));
+    if (this.hasHeaderUserMenuTarget) {
+      document.addEventListener("click", this.handleOutsideClick.bind(this));
+    }
   }
 
   disconnect() {
-    document.removeEventListener("click", this.handleOutsideClick.bind(this));
+    if (this.hasHeaderUserMenuTarget) {
+      document.removeEventListener("click", this.handleOutsideClick.bind(this));
+    }
   }
 
   changeVisibility(event) {
     event.stopPropagation();
-    this.toggleMenu();
+    if (this.hasHeaderUserMenuTarget) {
+      this.toggleMenu();
+    }
   }
 
   toggleMenu() {

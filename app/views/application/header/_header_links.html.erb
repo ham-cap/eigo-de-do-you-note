@@ -11,12 +11,14 @@
           <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
         <% end %>
       </div>
-      <span class="header-links__link-label">ユーザーメニュー</span>
-      <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
-        <div class="header-dropdown__inner">
-          <%= render 'application/header/user_menu' %>
+      <% if current_user %>
+        <span class="header-links__link-label">ユーザーメニュー</span>
+        <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
+          <div class="header-dropdown__inner">
+            <%= render 'application/header/user_menu' %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </button>
   </div>
 </li>
