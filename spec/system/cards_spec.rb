@@ -6,6 +6,7 @@ RSpec.describe "Cards", type: :system do
 
   before do
     log_in_as user
+    expect(page).to have_content('ログインしました', wait: 10)
     expect(page).to have_content("Cards#index", wait: 10)
   end
 
@@ -149,5 +150,13 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_selector('.spinner', wait: 10)
     expect(page).to have_content('本日は晴天なり', wait: 10)
     expect(page).to have_content('testing a microphone', wait: 10)
+  end
+
+  it 'user can log out', :js do
+    click_on 'hamburger_menu_icon'
+    expect(page).to have_content 'ログアウト'
+    click_on 'ログアウト'
+    expect(page).to have_content 'Home#index'
+    expect(page).to have_content 'ログアウトしました'
   end
 end
