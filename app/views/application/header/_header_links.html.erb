@@ -7,7 +7,7 @@
           <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
         <% end %>
       </div>
-    <button class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
+    <nav class="header-links__link js-header-dropdown test-show-menu" data-action="click->header-user-menu#changeVisibility" >
       <% if current_user %>
         <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
         <div class="header-dropdown" data-header-user-menu-target="headerUserMenu">
@@ -16,6 +16,6 @@
           </div>
         </div>
       <% end %>
-    </button>
+    </nav>
   </div>
 </li>

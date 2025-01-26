@@ -16,7 +16,7 @@
       <%= link_to 'ログアウト', log_out_path, class: 'header-dropdown__item-link logout-button', data: { turbo_prefetch: false } %>
     </li>
     <li class="header-dropdown__item">
-      <%= link_to '退会', '', class: 'header-dropdown__item-link', data: { turbo_prefetch: false } %>
+      <%= button_to '退会', user_path, method: :delete, data: { turbo_confirm: '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' }, class: 'header-dropdown__item-link' %>
     </li>
   </ul>
 </div>

@@ -58,3 +58,7 @@
   width: 40px;
   height: 40px;
 }
+
+.header-links__link {
+  cursor: pointer;
+}
