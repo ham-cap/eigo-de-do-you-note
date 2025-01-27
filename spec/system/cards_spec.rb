@@ -156,7 +156,7 @@ RSpec.describe "Cards", type: :system do
     find_by_id('menu-close').click
     within('#menu-open') do
       expect(page).to have_content('ログアウト', wait: 10)
-      click_on('ログアウト')
+      find_by_id('logout').click
     end
     expect(page).to have_content 'Home#index'
     expect(page).to have_content 'ログアウトしました'
@@ -167,7 +167,7 @@ RSpec.describe "Cards", type: :system do
     within('#menu-open') do
       expect(page).to have_content('退会', wait: 10)
       accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
-        click_on '退会'
+        find_by_id('withdrawal').click
       end
     end
     expect(page).to have_content 'Home#index'
