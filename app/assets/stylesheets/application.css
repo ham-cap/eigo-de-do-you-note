@@ -20,18 +20,6 @@
   position: relative;
 }
 
-.header-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-}
-
-.header-dropdown.is-visible {
-  display: block;
-}
-
 .header-current-user__icon {
   width: 40px;
   height: 40px;
