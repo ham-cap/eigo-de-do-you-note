@@ -154,7 +154,7 @@ RSpec.describe "Cards", type: :system do
 
   it 'user can log out', :js do
     click_on 'hamburger_menu_icon'
-    expect(page).to have_selector('.header-dropdown__items', visible: true, wait: 10)
+    expect(page).to have_selector('#menu-open', visible: true, wait: 10)
     expect(page).to(have_content 'ログアウト', wait: 10)
     click_on 'ログアウト'
     expect(page).to have_content 'Home#index'
@@ -163,7 +163,7 @@ RSpec.describe "Cards", type: :system do
 
   it 'user can withdrawal', :js do
     click_on 'hamburger_menu_icon'
-    expect(page).to have_selector('.header-dropdown__items', visible: true, wait: 10)
+    expect(page).to have_selector('#menu-open', visible: true, wait: 10)
     expect(page).to have_content('退会', wait: 10)
     accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
       click_on '退会'
