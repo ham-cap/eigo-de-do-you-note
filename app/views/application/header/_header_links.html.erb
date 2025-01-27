@@ -8,7 +8,7 @@
   </div>
   <% if current_user %>
     <div data-controller="dropdown" data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide" class="inline-block relative">
-      <button data-action="dropdown#toggle:stop" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">
+      <button id="menu-close" data-action="dropdown#toggle:stop" class="px-2.5 py-1 bg-blue-500 text-white text-sm rounded">
         <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
       </button>
       <div id="menu-open" data-dropdown-target="menu" class="hidden absolute top-4 right-0 mt-8 flex w-screen max-w-max text-orange-950">

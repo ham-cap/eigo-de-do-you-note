@@ -153,20 +153,20 @@ RSpec.describe "Cards", type: :system do
   end
 
   it 'user can log out', :js do
-    click_on 'hamburger_menu_icon'
-    expect(page).to have_selector('#menu-open', visible: true, wait: 10)
-    expect(page).to(have_content 'ログアウト', wait: 10)
-    click_on 'ログアウト'
+    find_by_id('menu-close').click
+    within('#menu-open') do
+      click_on('ログアウト')
+    end
     expect(page).to have_content 'Home#index'
     expect(page).to have_content 'ログアウトしました'
   end
 
   it 'user can withdrawal', :js do
-    click_on 'hamburger_menu_icon'
-    expect(page).to have_selector('#menu-open', visible: true, wait: 10)
-    expect(page).to have_content('退会', wait: 10)
-    accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
-      click_on '退会'
+    find_by_id('menu-close').click
+    within('#menu-open') do
+      accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
+        click_on '退会'
+      end
     end
     expect(page).to have_content 'Home#index'
     expect(page).to have_content '退会しました'
