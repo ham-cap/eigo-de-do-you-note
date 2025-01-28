@@ -158,8 +158,8 @@ RSpec.describe "Cards", type: :system do
     within('#menu-open') do
       click_on 'ログアウトログアウト'
     end
-    expect(page).to have_content 'Cards#index'
-    # expect(page).to have_content 'ログアウトしました'
+    expect(page).to have_content 'Home#index'
+    expect(page).to have_content 'ログアウトしました'
   end
 
   # it 'user can withdrawal', :js do
