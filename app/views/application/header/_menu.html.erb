@@ -1,4 +1,4 @@
-<div class="text-sm bg-white shadow-lg rounded border w-32">
+<div class="text-sm bg-white shadow-lg rounded border overflow-hidden w-32">
   <ul class="header-dropdown__items">
     <li class="header-dropdown__item">
       <%= link_to 'トップページ', cards_path, class: 'footer-nav__item-link' %>
@@ -10,7 +10,7 @@
       <%= link_to '利用規約', '', class: 'footer-nav__item-link' %>
     </li>
     <li class="header-dropdown__item">
-      <%= link_to 'ログアウトログアウト', cards_path, class: 'footer-nav__item-link' %>
+      <%= link_to 'ログアウトログアウト', log_out_path, class: 'footer-nav__item-link' %>
     </li>
     <li class="header-dropdown__item">
       <%= link_to 'ログアウト', log_out_path, class: 'header-dropdown__item-link logout-button', id: 'logout', data: { turbo_prefetch: false } %>
