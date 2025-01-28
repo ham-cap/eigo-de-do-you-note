@@ -156,6 +156,7 @@ RSpec.describe "Cards", type: :system do
     click_on 'hamburger_menu_icon'
     expect(page).to have_content('プライバシーポリシー', wait: 10)
     expect(page).to have_content('プライバシーポリシー2', wait: 10)
+    expect(page).to have_content('ログアウト', wait: 10)
     within('#menu-open') do
       click_on 'プライバシーポリシー'
     end
