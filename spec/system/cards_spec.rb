@@ -155,9 +155,9 @@ RSpec.describe "Cards", type: :system do
   it 'user can log out', :js do
     click_on 'hamburger_menu_icon'
     expect(page).to have_content('利用規約', wait: 10)
-    expect(page).to have_content('ログアウトログアウト', wait: 10)
+    expect(page).to have_content('ログアウト', wait: 10)
     within('#menu-open') do
-      click_on 'ログアウトログアウト'
+      click_on 'ログアウト'
     end
     expect(page).to have_content 'Home#index'
     expect(page).to have_content 'ログアウトしました'
