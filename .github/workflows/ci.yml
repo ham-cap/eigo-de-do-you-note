@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, debug/fix-tests-failed-in-ci]
 
 jobs:
   scan_ruby:

@@ -152,15 +152,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('testing a microphone', wait: 10)
   end
 
-  # it 'user can log out', :js do
-  #   click_on 'hamburger_menu_icon'
-  #   expect(page).to have_content('ログアウト', wait: 10)
-  #   within('#menu-open') do
-  #     find_by_id('logout').click
-  #   end
-  #   expect(page).to have_content 'Home#index'
-  #   expect(page).to have_content 'ログアウトしました'
-  # end
+  it 'user can log out', :js do
+    click_on 'hamburger_menu_icon'
+    expect(page).to have_content('プライバシーポリシー', wait: 10)
+    within('#menu-open') do
+      click_on 'プライバシーポリシー'
+    end
+    expect(page).to have_content 'Cards#index'
+    # expect(page).to have_content 'ログアウトしました'
+  end
 
   # it 'user can withdrawal', :js do
   #   click_on 'hamburger_menu_icon'
