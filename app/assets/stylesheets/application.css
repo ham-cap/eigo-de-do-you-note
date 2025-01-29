@@ -46,14 +46,3 @@
   width: 40px;
   height: 40px;
 }
-
-.header-dropdown-container {
-  width: 200px;
-  height: 200px;
-}
-.header-dropdown__item {
-  height: auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-}
