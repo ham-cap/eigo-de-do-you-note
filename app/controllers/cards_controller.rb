@@ -69,13 +69,10 @@ class CardsController < ApplicationController
   end
 
   def update
-    @card = Card.find(params[:id])
     if @card.update(card_params)
-      respond_to do |format|
-        format.html { redirect_to cards_path, notice: 'Card was successfully updated.' }
-      end
+      flash.now.notice = 'Card was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

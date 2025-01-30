@@ -1,5 +1,5 @@
 <h1>編集</h1>
-<%= turbo_frame_tag "card_#{@card.id}" do %>
+<%= turbo_frame_tag @card do %>
   <%= form_with model: @card do |form| %>
     <%= form.label :ja_phrase, '日本語' %>
     <%= form.text_area :ja_phrase %>
