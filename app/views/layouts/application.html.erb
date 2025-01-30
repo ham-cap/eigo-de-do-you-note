@@ -22,11 +22,9 @@
     <div class="wrapper is-application">
       <%= render 'application/header/header' %>
     </div>
-    <% flash.each do |message_type, message| %>
-      <div data-controller="flash" data-flash-dismiss-after-value="3000">
-        <div class="flash-message <%= message_type %>"><%= message %></div>
-      </div>
-    <% end %>
+    <div id="flash">
+      <%= render "flash" %>
+    </div>
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "card_#{card.id}" do %>
+<%= turbo_frame_tag card do %>
   <div data-controller="memorized-button" id="card-<%= card.id %>" class="a-card" >
     <p>和文：<%= link_to card.ja_phrase, card_path(card), data: { turbo_frame: '_top' } %></p>
     <p>英文：<%= link_to card.en_phrase, card_path(card), data: { turbo_frame: '_top' } %></p>
