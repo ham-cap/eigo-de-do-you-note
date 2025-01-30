@@ -13,21 +13,28 @@
       </li>
     </ul>
   </nav>
-  <%= form_with url: cards_path, method: :get, html: { data: { turbo_frame: "cards", controller: "search-form", action: "input->search-form#submit" } } do |form| %>
-    <%= form.hidden_field :target, value: @target %>
-    <%= form.label :search_terms, 'カードを検索' %>
-    <%= form.text_field :search_terms, autocomplete: :off %>
-    <%= form.submit "検索", name: nil %>
+  <%= search_form_for(
+      @search,
+      html: {
+        data: {
+          turbo_frame: "cards",
+          controller: "search",
+          action: "input->search#submit"
+        }
+      }) do |f| %>
+    <%= f.label :ja_phrase_or_en_phrase_cont, "カードを検索" %>
+    <%= f.search_field :ja_phrase_or_en_phrase_cont %>
+    <%= hidden_field_tag :target, @target %>
   <% end %>
   <%= link_to '新規作成', new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
   <div>
     <%= link_to '復習モードへ', review_cards_path, data: { turbo_prefetch: false } %>
   </div>
   <%= turbo_frame_tag Card.new %>
-  <div id='cards'>
+  <%= turbo_frame_tag "cards" do%>
     <%= turbo_frame_tag "cards-page-#{@cards.current_page}" do %>
       <%= render partial: 'card', collection: @cards %>
       <%= turbo_frame_tag "cards-page-#{@cards.next_page}", loading: :lazy, src: path_to_next_page(@cards) %>
     <% end %>
-  </div>
+  <% end %>
 </div>
