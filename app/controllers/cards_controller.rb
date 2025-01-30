@@ -20,7 +20,7 @@ class CardsController < ApplicationController
     @search = @cards.ransack(params[:q])
     @search.sorts = 'created_at desc' if @search.sorts.empty?
 
-    @cards = @search.result# .page(params[:page])
+    @cards = @search.result.page(params[:page])
   end
 
   def new

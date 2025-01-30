@@ -32,6 +32,9 @@
   </div>
   <%= turbo_frame_tag Card.new %>
   <%= turbo_frame_tag "cards" do%>
-    <%= render partial: 'card', collection: @cards %>
+    <%= turbo_frame_tag "cards-page-#{@cards.current_page}" do %>
+      <%= render partial: 'card', collection: @cards %>
+      <%= turbo_frame_tag "cards-page-#{@cards.next_page}", loading: :lazy, src: path_to_next_page(@cards) %>
+    <% end %>
   <% end %>
 </div>
