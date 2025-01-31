@@ -43,12 +43,9 @@ class CardsController < ApplicationController
     end
 
     if @card.save
-      respond_to do |format|
-        format.html { redirect_to cards_path, notice: 'Card was successfully created.' }
-        format.turbo_stream
-      end
+      flash.now.notice = 'Card was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
