@@ -7,10 +7,10 @@
       <%= link_to '復習モード', review_cards_path, data: { turbo_prefetch: false } %>
     </li>
     <li class="header-dropdown__item">
-      <%= link_to '利用規約', '', class: 'header-dropdown__item-link' %>
+      <%= link_to '利用規約', terms_path, class: 'header-dropdown__item-link' %>
     </li>
     <li class="header-dropdown__item">
-      <%= link_to 'プライバシーポリシー', '', class: 'header-dropdown__item-link' %>
+      <%= link_to 'プライバシーポリシー', privacy_path, class: 'header-dropdown__item-link' %>
     </li>
     <li class="header-dropdown__item">
       <%= link_to 'ログアウト', log_out_path, class: 'header-dropdown__item-link', data: { turbo_prefetch: false } %>
