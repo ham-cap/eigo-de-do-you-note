@@ -14,19 +14,21 @@
     </li>
   </ul>
 </nav>
-<%= search_form_for(
-    @search,
-    html: {
-      data: {
-        turbo_frame: "cards",
-        controller: "search",
-        action: "input->search#submit"
-      }
-    }) do |f| %>
-  <%= f.label :ja_phrase_or_en_phrase_cont, "カードを検索" %>
-  <%= f.search_field :ja_phrase_or_en_phrase_cont %>
-  <%= hidden_field_tag :target, @target %>
-<% end %>
+<div class="search_form mb-8">
+  <%= search_form_for(
+      @search,
+      html: {
+        data: {
+          turbo_frame: "cards",
+          controller: "search",
+          action: "input->search#submit"
+        }
+      }) do |f| %>
+    <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索" %>
+    <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem]" %>
+    <%= hidden_field_tag :target, @target %>
+  <% end %>
+</div>
 <div data-controller="creation-form">
   <div class="creation_icon w-24 h-24 rounded-full fixed bottom-10 right-4 md:right-[calc(50%-(theme(maxWidth.screen-md)/2)+1rem)]" data-action="click->creation-form#changeVisibility">
     <%= link_to image_tag('creation_icon.png'), new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
