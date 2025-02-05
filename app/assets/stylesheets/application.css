@@ -28,19 +28,14 @@
   display: block;
 }
 
-.hamburger_menu_icon {
-  width: 40px;
-  height: 40px;
-}
-
 .a-filter {
-  position: relative; /* 子要素の a を li 内で自由に配置できるように */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 30%;
-  height: 2rem; /* li の高さを統一 */
-  border-radius: 9999px; /* rounded-md */
+  height: 2rem;
+  border-radius: 9999px;
   border: 1px solid #b0b0b0;
   color: #b0b0b0;
   margin-right: auto;

@@ -10,7 +10,7 @@
        data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide"
        class="menu relative">
     <button id="menu-close" data-action="dropdown#toggle:stop" class="p-2 text-orange-950 rounded-full flex items-center hover:bg-gray-300">
-      <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'hamburger_menu_icon' %>
+      <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'w-10 h-10' %>
     </button>
     <div id="menu-open" data-dropdown-target="menu" class="header-dropdown absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-50 hidden">
       <%= render 'application/header/menu' %>
