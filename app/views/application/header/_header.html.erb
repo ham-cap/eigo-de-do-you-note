@@ -1,15 +1,11 @@
-<header class="header">
-  <div class="container">
-    <div class="header__inner">
-      <div class="header__start">
-        <a href="/cards" class="header__title">
-          <%= image_tag('card_icon.jpg', alt: 'ロゴ', class: 'header__title-image') %>
-        </a>
-      </div>
-      <div class="header__end">
-        <%= render 'application/header/header_links' %>
-      </div>
-    </div>
-    <hr class="a-border" />
+<header class="flex justify-between flex items-center justify-center">
+  <div class="logo w-10 h-10 rounded-full object-cover">
+    <a href="/cards">
+      <%= image_tag('card_icon.jpg', alt: 'ロゴ', class: 'w-10 h-10 rounded-full object-cover') %>
+    </a>
+  </div>
+  <div class="header-links flex justify-end">
+    <%= render 'application/header/header_links' %>
   </div>
 </header>
+<hr class="a-border"/>

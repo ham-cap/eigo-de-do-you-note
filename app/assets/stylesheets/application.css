@@ -20,20 +20,6 @@
   position: relative;
 }
 
-.header-current-user__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.header__title-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .spinner {
   display: none;
 }
@@ -42,7 +28,40 @@
   display: block;
 }
 
-.hamburger_menu_icon {
-  width: 40px;
-  height: 40px;
+.a-filter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid #b0b0b0;
+  color: #b0b0b0;
+  margin-right: auto;
+}
+
+.a-filter .btn {
+  position: absolute; /* li 全体を覆う */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* 中央揃え */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.a-filter.is-selected {
+  display: inline-flex;
+  height: 2rem; /* 12 * 0.25rem */
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; /* rounded-md */
+  background-color: #6791d1; /* neutral-950 */
+  padding-left: 1.5rem; /* 6 * 0.25rem */
+  padding-right: 1.5rem; /* 6 * 0.25rem */
+  font-weight: 500; /* font-medium */
+  color: #fafafa; /* neutral-50 */
 }

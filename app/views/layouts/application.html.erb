@@ -18,18 +18,18 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="text-sm md:text-base max-w-screen-md mx-auto h-screen flex flex-col">
     <div class="wrapper is-application">
       <%= render 'application/header/header' %>
-    </div>
     <div id="flash">
       <%= render "flash" %>
     </div>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main>
       <%= yield %>
     </main>
     <div class="footer">
       <%= render 'application/footer/footer' %>
+    </div>
     </div>
   </body>
 </html>

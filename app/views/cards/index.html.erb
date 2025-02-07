@@ -1,18 +1,18 @@
-<div>
-  <h1 class="font-bold text-4xl">Cards#index</h1>
-  <nav>
-    <ul>
-      <li>
-        <%= link_to '全て', cards_path(target: 'all') %>
-      </li>
-      <li>
-        <%= link_to '覚えたカード', cards_path(target: 'memorized') %>
-      </li>
-      <li>
-        <%= link_to 'まだ覚えていないカード', cards_path(target: 'unmemorized') %>
-      </li>
-    </ul>
-  </nav>
+<h1 class="flex justify-center font-bold text-4xl my-8">フレーズ一覧</h1>
+<nav class="w-3/5 my-4">
+  <ul data-controller="card-filter" class="filters flex justify-start">
+    <li class="a-filter is-selected" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <%= link_to '全て', cards_path, data: {turbo_frame: "cards"}, class: 'btn'%>
+    </li>
+    <li class="a-filter" id="filter-memorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <%= link_to '覚えた', cards_path(target: 'memorized'), data: {turbo_frame: "cards"}, class: 'btn'%>
+    </li>
+    <li class="a-filter" id="filter-unmemorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <%= link_to '覚えていない', cards_path(target: 'unmemorized'), data: {turbo_frame: "cards"}, class: 'btn'%>
+    </li>
+  </ul>
+</nav>
+<div class="search_form mb-8">
   <%= search_form_for(
       @search,
       html: {
@@ -22,19 +22,22 @@
           action: "input->search#submit"
         }
       }) do |f| %>
-    <%= f.label :ja_phrase_or_en_phrase_cont, "カードを検索" %>
-    <%= f.search_field :ja_phrase_or_en_phrase_cont %>
+    <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "text-[#5D6368]" %>
+    <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368]" %>
     <%= hidden_field_tag :target, @target %>
   <% end %>
-  <%= link_to '新規作成', new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
-  <div>
-    <%= link_to '復習モードへ', review_cards_path, data: { turbo_prefetch: false } %>
-  </div>
-  <%= turbo_frame_tag Card.new %>
-  <%= turbo_frame_tag "cards" do%>
-    <%= turbo_frame_tag "cards-page-#{@cards.current_page}" do %>
-      <%= render partial: 'card', collection: @cards %>
-      <%= turbo_frame_tag "cards-page-#{@cards.next_page}", loading: :lazy, src: path_to_next_page(@cards) %>
-    <% end %>
-  <% end %>
 </div>
+<div data-controller="creation-form">
+  <div class="creation_icon w-24 h-24 rounded-full fixed bottom-[120px] right-0 md:right-auto md:left-[calc(50%+theme(maxWidth.screen-md)/2-6rem)]" data-action="click->creation-form#changeVisibility">
+    <%= link_to image_tag('creation_icon.png'), new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
+  </div>
+  <div class="flex justify-center">
+    <%= turbo_frame_tag Card.new, class: "flex flex-col justify-center h-[400px] w-2/3 fixed top-0 left-50 hidden", data: { "creation-form-target": "creationForm" }%>
+  </div>
+</div>
+<%= turbo_frame_tag "cards" do%>
+  <%= turbo_frame_tag "cards-page-#{@cards.current_page}" do %>
+    <%= render partial: 'card', collection: @cards %>
+    <%= turbo_frame_tag "cards-page-#{@cards.next_page}", loading: :lazy, src: path_to_next_page(@cards) %>
+  <% end %>
+<% end %>

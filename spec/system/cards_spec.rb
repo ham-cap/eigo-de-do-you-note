@@ -7,11 +7,11 @@ RSpec.describe "Cards", type: :system do
   before do
     log_in_as user
     expect(page).to have_content('ログインしました', wait: 10)
-    expect(page).to have_content("Cards#index", wait: 10)
+    expect(page).to have_content('フレーズ一覧', wait: 10)
   end
 
   it 'displays a list of cards', :js do
-    expect(page).to have_content 'Cards#index'
+    expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content cards[0].ja_phrase
     expect(page).to have_content cards[0].en_phrase
     expect(page).to have_content cards[1].ja_phrase
@@ -22,19 +22,19 @@ RSpec.describe "Cards", type: :system do
 
   it 'creates a new card', :js do
     visit cards_path
-    expect(page).to have_content 'Cards#index'
-    click_on '新規作成'
-    fill_in '気になるフレーズ', with: '本日は晴天なり'
+    expect(page).to have_content 'フレーズ一覧'
+    find('.creation_icon').click
+    fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content('Card was successfully created.', wait: 10)
-    expect(page).to have_content('Cards#index', wait: 10)
+    expect(page).to have_content('フレーズ一覧', wait: 10)
     expect(page).to have_content('本日は晴天なり', wait: 10)
     expect(page).to have_content('testing a microphone', wait: 10)
   end
 
   it 'display a details page of cards', :js do
     visit cards_path
-    expect(page).to have_content "Cards#index"
+    expect(page).to have_content "フレーズ一覧"
     click_on cards[0].ja_phrase
     expect(page).to have_content 'Cards#show'
     expect(page).to have_content cards[0].ja_phrase
@@ -51,19 +51,19 @@ RSpec.describe "Cards", type: :system do
     accept_confirm "本当に削除しますか？" do
       click_on '削除する'
     end
-    expect(page).to have_content 'Cards#index'
+    expect(page).to have_content 'フレーズ一覧'
     expect(page).not_to have_content cards[0].ja_phrase
     expect(page).not_to have_content cards[0].en_phrase
   end
 
   it 'updates a card', :js do
     visit cards_path
-    expect(page).to have_content "Cards#index"
+    expect(page).to have_content "フレーズ一覧"
     click_on '編集する', match: :first
     fill_in '日本語', with: 'カードを更新した'
     fill_in '英語', with: 'Updated card'
     click_on '更新する'
-    expect(page).to have_content 'Cards#index'
+    expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content 'カードを更新した'
     expect(page).to have_content 'Updated card'
   end
@@ -100,7 +100,9 @@ RSpec.describe "Cards", type: :system do
       click_on '覚えた！'
       expect(page).to have_content "忘れた！"
     end
-    click_on '復習モードへ'
+    click_on 'hamburger_menu_icon'
+    expect(page).to have_content '復習モード'
+    click_on '復習モード'
     expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content '次のカードへ'
@@ -109,11 +111,11 @@ RSpec.describe "Cards", type: :system do
   it 'can be searched incrementally', :js do
     card = FactoryBot.create(:card, :for_incremental_search_test, user: user)
     visit cards_path
-    fill_in 'カードを検索', with: 'インクリメンタル'
+    fill_in 'フレーズを検索', with: 'インクリメンタル'
     expect(page).to have_content 'カード一覧画面ではインクリメンタルサーチが使用できます。'
     expect(page).to have_selector('.a-card', count: 1)
     visit cards_path
-    fill_in 'カードを検索', with: 'incremental'
+    fill_in 'フレーズを検索', with: 'incremental'
     expect(page).to have_content 'Incremental search is available on the card list screen.'
     expect(page).to have_selector('.a-card', count: 1)
   end
@@ -122,10 +124,10 @@ RSpec.describe "Cards", type: :system do
     memorized_card = FactoryBot.create(:card, user: user)
     unmemorized_card = FactoryBot.create(:card, :unmemorized1, user: user)
     visit cards_path
-    click_on '覚えたカード'
+    click_on '覚えた'
     expect(page).to have_content memorized_card.ja_phrase
     expect(page).not_to have_content unmemorized_card.ja_phrase
-    click_on 'まだ覚えていないカード'
+    click_on '覚えていない'
     expect(page).not_to have_content memorized_card.ja_phrase
     expect(page).to have_content unmemorized_card.ja_phrase
   end
@@ -144,8 +146,8 @@ RSpec.describe "Cards", type: :system do
 
   it 'spinner show up while card creation', :js do
     visit cards_path
-    click_on '新規作成'
-    fill_in '気になるフレーズ', with: '本日は晴天なり'
+    find('.creation_icon').click
+    fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
     expect(page).to have_content('Now translating...', wait: 10)
     expect(page).to have_selector('.spinner', wait: 10)
