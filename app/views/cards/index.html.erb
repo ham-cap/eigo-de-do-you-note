@@ -1,6 +1,4 @@
-<div class="flex justify-center">
-  <h1 class="font-bold text-4xl">Cards#index</h1>
-</div>
+<h1 class="flex justify-center font-bold text-4xl my-8">フレーズ一覧</h1>
 <nav class="w-3/5 my-4">
   <ul data-controller="card-filter" class="filters flex justify-start">
     <li class="a-filter is-selected" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
@@ -24,8 +22,8 @@
           action: "input->search#submit"
         }
       }) do |f| %>
-    <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索" %>
-    <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem]" %>
+    <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "text-[#5D6368]" %>
+    <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368]" %>
     <%= hidden_field_tag :target, @target %>
   <% end %>
 </div>
