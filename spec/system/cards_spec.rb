@@ -60,8 +60,8 @@ RSpec.describe "Cards", type: :system do
     visit cards_path
     expect(page).to have_content "フレーズ一覧"
     click_on '編集する', match: :first
-    fill_in '日本語', with: 'カードを更新した'
-    fill_in '英語', with: 'Updated card'
+    fill_in 'card[ja_phrase]', with: 'カードを更新した'
+    fill_in 'card[en_phrase]', with: 'Updated card'
     click_on '更新する'
     expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content 'カードを更新した'
