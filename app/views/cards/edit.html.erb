@@ -1,13 +1,23 @@
-<h1>編集</h1>
+<h1 class="flex justify-center font-bold text-4xl my-8">編集</h1>
 <%= turbo_frame_tag @card do %>
   <%= form_with model: @card do |form| %>
-    <%= form.label :ja_phrase, '日本語' %>
-    <%= form.text_area :ja_phrase %>
-    <%= form.label :en_phrase, '英語' %>
-    <%= form.text_area :en_phrase %>
-    <div>
-      <%= form.submit '更新する' %>
+    <div class="a-card-container flex flex-col w-5/6 mb-8">
+      <div class="phrase-pair mb-2">
+        <div class="ja-phrase w-full flex flex-col">
+          <%= form.text_area :ja_phrase, class: 'h-[3rem] border border-gray-400 rounded-md' %>
+        </div>
+        <div class="en-phrase w-full flex flex-col">
+          <%= form.text_area :en_phrase, class: 'h-[3rem] border border-gray-400 rounded-md' %>
+        </div>
+      </div>
+      <div class="buttons flex flex-col space-y-2">
+        <div class="submit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+          <%= form.submit '更新する', class: "w-full h-full cursor-pointer" %>
+        </div>
+        <div class="cancel-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+          <%= link_to 'キャンセル', @card, class: "w-full h-full flex justify-center items-center cursor-pointer" %>
+        </div>
+      </div>
     </div>
-  <%= link_to 'キャンセル', @card %>
   <% end %>
 <% end %>
