@@ -56,13 +56,20 @@ class CardsController < ApplicationController
   def destroy
     @card = Card.find(params[:id])
     @card.destroy
+    flash.now.notice = '削除しました'
+
     respond_to do |format|
-      format.html { redirect_to cards_path, notice: '削除しました', status: :see_other }
+      if params[:from_show]
+        format.html { redirect_to cards_path, notice: 'カードを削除しました' }
+      else
+        format.turbo_stream
+      end
     end
   end
 
   def edit
     @card = Card.find(params[:id])
+    @from_show = params[:from_show]
   end
 
   def update
