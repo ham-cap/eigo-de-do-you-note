@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="edit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
-        <%= link_to '編集する', edit_card_path(card), data: { turbo_frame: dom_id(card) }, class: "flex justify-center w-full h-full"%>
+        <%= link_to '編集する', edit_card_path(card, local_assigns[:from_show] ? { from_show: from_show } : nil), data: { turbo_frame: dom_id(card) }, class: "flex justify-center w-full h-full"%>
       </div>
     </div>
     <div class="memorized-button-wrapper flex flex-row-reverse items-center ml-4 mb-8 w-1/6">
