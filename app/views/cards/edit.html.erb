@@ -17,6 +17,11 @@
         <div class="cancel-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
           <%= link_to 'キャンセル', @card, class: "w-full h-full flex justify-center items-center cursor-pointer" %>
         </div>
+        <div class="delete-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+          <%= link_to '削除する', card_path(@card, @from_show ? { from_show: @from_show } : nil),
+                                  data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？', turbo_frame: '_top' },
+                                  class: "w-full h-full flex justify-center items-center cursor-pointer" %>
+        </div>
       </div>
     </div>
   <% end %>

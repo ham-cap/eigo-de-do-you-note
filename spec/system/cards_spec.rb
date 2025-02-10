@@ -34,9 +34,9 @@ RSpec.describe "Cards", type: :system do
 
   it 'display a details page of cards', :js do
     visit cards_path
-    expect(page).to have_content "フレーズ一覧"
+    expect(page).to have_content 'フレーズ一覧'
     click_on cards[0].ja_phrase
-    expect(page).to have_content 'Cards#show'
+    expect(page).to have_content '詳細'
     expect(page).to have_content cards[0].ja_phrase
     expect(page).to have_content cards[0].en_phrase
     expect(page).not_to have_content cards[1].ja_phrase
@@ -47,11 +47,12 @@ RSpec.describe "Cards", type: :system do
     visit card_path(cards[0])
     expect(page).to have_content cards[0].ja_phrase
     expect(page).to have_content cards[0].en_phrase
-    expect(page).to have_content 'Cards#show'
+    expect(page).to have_content '詳細'
+    click_on '編集する'
     accept_confirm "本当に削除しますか？" do
       click_on '削除する'
     end
-    expect(page).to have_content 'フレーズ一覧'
+    expect(page).to have_content('フレーズ一覧', wait: 10)
     expect(page).not_to have_content cards[0].ja_phrase
     expect(page).not_to have_content cards[0].en_phrase
   end
