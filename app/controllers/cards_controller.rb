@@ -81,7 +81,7 @@ class CardsController < ApplicationController
   end
 
   def review
-    cards = Card.unmemorized.order(created_at: :desc)
+    cards = current_user.cards.unmemorized.order(created_at: :desc)
     if params[:id]
       @card = Card.find(params[:id])
       @next_card = cards.where('id < ?', @card.id).first

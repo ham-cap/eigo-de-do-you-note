@@ -4,12 +4,15 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["enPhrase", "switchingButton"];
   switchEnPhraseVisibility() {
-    this.enPhraseTarget.style.display =
-      this.enPhraseTarget.style.display === "none" ? "block" : "none";
+    if (this.enPhraseTarget.classList.contains("hidden")) {
+      this.enPhraseTarget.classList.remove("hidden");
+    } else {
+      this.enPhraseTarget.classList.add("hidden");
+    }
 
     this.switchingButtonTarget.textContent =
-      this.switchingButtonTarget.textContent === "英文を表示する"
+      this.switchingButtonTarget.textContent === "英文を表示"
         ? "英文を隠す"
-        : "英文を表示する";
+        : "英文を表示";
   }
 }
