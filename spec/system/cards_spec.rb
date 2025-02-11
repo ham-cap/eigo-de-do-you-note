@@ -77,15 +77,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
-    click_on '英文を表示する'
+    click_on '英文を表示'
     expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
     click_on '英文を隠す'
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
-    click_on '次のカードへ'
+    click_on '次のフレーズへ'
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'まだ暗記できていない'
     expect(page).not_to have_content 'I haven\'t memorized it yet.'
-    click_on '前のカードへ'
+    click_on '前のフレーズへ'
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
@@ -106,7 +106,7 @@ RSpec.describe "Cards", type: :system do
     click_on '復習モード'
     expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
     expect(page).to have_content 'まだ暗記できていない'
-    expect(page).not_to have_content '次のカードへ'
+    expect(page).not_to have_content '次のフレーズへ'
   end
 
   it 'can be searched incrementally', :js do
