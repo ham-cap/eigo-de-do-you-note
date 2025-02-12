@@ -20,23 +20,20 @@ RSpec.describe "Cards", type: :system do
   describe 'logged in', :js do
     before do
       log_in_as user
+      expect(page).to have_content 'ログインしました'
     end
 
     it 'visit terms page', :js do
-      expect(page).to have_content 'ログインしました'
-      click_on 'hamburger_menu_icon'
-      within('#menu-open') do
-        click_on '利用規約'
-      end
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      click_on '利用規約', match: :first
       expect(page).to have_css 'h1', text: '利用規約'
     end
 
     it 'visit privacy policy page', :js do
-      expect(page).to have_content 'ログインしました'
-      click_on 'hamburger_menu_icon'
-      within('#menu-open') do
-      click_on 'プライバシーポリシー'
-      end
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      click_on 'プライバシーポリシー', match: :first
       expect(page).to have_css 'h1', text: 'プライバシーポリシー'
     end
   end

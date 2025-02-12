@@ -1,30 +1,30 @@
 <div data-controller="spinner">
-  <div data-spinner-target="form" class="bg-gray-200 bg-opacity-100 h-[400px] w-full rounded-lg border-solid border-2 border-gray-500">
-    <%= form_with model: card do |form| %>
+  <div data-spinner-target="form" class="bg-white h-64 md:h-80 w-full rounded-lg border-solid border-2 border-gray-500">
+    <%= form_with model: card, class: "h-full flex flex-col" do |form| %>
       <div class="form-label-container flex justify-center">
-        <div class="form-label text-lg w-3/4">
+        <div class="form-label text-base md:text-2xl w-3/4 my-2">
           <%= form.label :original_text, '翻訳したいフレーズ' %>
         </div>
       </div>
-      <div class="textarea-container flex justify-center">
-        <div class="form-textarea w-3/4 h-64 p-0">
-          <%= form.text_area :original_text, class: 'w-full h-full' %>
-        </div>
+      <div class="textarea-container flex justify-center h-1/2">
+        <%= form.text_area :original_text, class: "w-3/4 h-full" %>
       </div>
       <% @card.errors.full_messages_for(:ja_phrase).each do |message| %>
-        <div><%= message %></div>
+        <div class="text-red-500"><%= message %></div>
       <% end %>
-      <div class="form-buttons flex flex-row md:flex-col grid justify-items-center">
-        <div class="submit-button w-1/2 mt-2 mb-2 grid justify-items-center rounded-full border border-gray-500 bg-[#6791d1] text-[#fafafa]">
-          <%= form.submit '翻訳する', class: 'w-full h-full flex justify-center cursor-pointer' %>
-        </div>
-        <div data-action="click->creation-form#changeVisibility" class="cancel-button w-1/2 mb-2 grid justify-content-center justify-items-center rounded-full border border-gray-500 text-gray-500">
-          <%= link_to 'キャンセル', cards_path, class: 'w-full h-full flex justify-center' %>
+      <div class="form-buttons grid justify-items-center">
+        <div class="w-full h-full flex items-center flex flex-col">
+          <div class="submit-button w-1/2 mt-2 mb-2 grid justify-items-center rounded-full border border-gray-500 bg-[#6791d1] text-[#fafafa]">
+            <%= form.submit '翻訳する', class: 'w-full h-full flex justify-center cursor-pointer md:text-lg' %>
+          </div>
+          <div data-action="click->creation-form#changeVisibility" class="cancel-button w-1/2 grid justify-content-center justify-items-center rounded-full border border-gray-500 text-gray-500">
+            <%= link_to 'キャンセル', cards_path, class: 'w-full h-full flex justify-center md:text-lg' %>
+          </div>
         </div>
       </div>
     <% end %>
   </div>
-  <div data-spinner-target="spinner" class="spinner bg-gray-300 h-[400px] w-full grid content-center">
+  <div data-spinner-target="spinner" class="spinner bg-white h-64 md:h-80 w-full grid content-center rounded-lg border-solid border-2 border-gray-500">
     <%= render 'spinner' %>
   </div>
 </div>

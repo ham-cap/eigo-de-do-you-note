@@ -1,13 +1,13 @@
 <%= turbo_frame_tag card do %>
-  <div id="card-<%= card.id %>" class="flex flex-row mb-8">
-    <div class="a-card-container flex flex-col w-full">
-      <div class="a-card h-24 w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
-        <div class="phrase-pair w-full grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
-          <div class="ja-phrase grid content-center w-full">
-            <p>・<%= link_to card.ja_phrase, card_path(card), data: { turbo_frame: '_top' } %></p>
+  <div id="card-<%= card.id %>" class="flex flex-col md:flex-row mb-8">
+    <div class="a-card-container flex flex-col w-full mb-2">
+      <div class="a-card min-h-24 w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
+        <div class="phrase-pair w-full h-auto grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
+          <div class="ja-phrase grid content-center w-full h-auto">
+            <p><%= link_to card.ja_phrase, card_path(card), data: { turbo_frame: '_top' }, class: "flex justify-center mx-[5px]" %></p>
           </div>
-          <div class="en-phrase grid content-center w-full">
-            <p>・<%= link_to card.en_phrase, card_path(card), data: { turbo_frame: '_top' } %></p>
+          <div class="en-phrase grid content-center w-full h-auto">
+            <p><%= link_to card.en_phrase, card_path(card), data: { turbo_frame: '_top' }, class: "flex justify-center mx-[5px]" %></p>
           </div>
         </div>
       </div>
@@ -15,8 +15,8 @@
         <%= link_to '編集する', edit_card_path(card, local_assigns[:from_show] ? { from_show: from_show } : nil), data: { turbo_frame: dom_id(card) }, class: "flex justify-center w-full h-full"%>
       </div>
     </div>
-    <div class="memorized-button-wrapper flex flex-row-reverse items-center ml-4 mb-8 w-1/6">
-      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[2rem] w-full border-2 border-solid border-[#aaaaaa]">
+    <div class="memorized-button-wrapper w-full flex flex-row items-center text-lg md:text-base md:ml-4 md:mb-8 md:w-1/6">
+      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[2rem] w-full border-2 border-solid border-[#aaaaaa] bg-[#FADC75]">
         <%= link_to card.memorized_at.nil? ? '覚えた！' : '忘れた！',
                     update_memorized_status_card_path(card),
                     data: { turbo_method: :patch,
