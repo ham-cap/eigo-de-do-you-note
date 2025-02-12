@@ -92,21 +92,27 @@ RSpec.describe "Cards", type: :system do
   end
 
   it 'a memorized button removes card from review mode', :js do
-    unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
-    unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
-    visit cards_path
-    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
-    within "#card-#{unmemorized_card2.id}" do
-      click_on '覚えた！'
-      expect(page).to have_content "忘れた！"
+    Capybara.using_session("another_session_in_cards_spec") do
+      log_in_as user
+      unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
+      unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
+      visit cards_path
+      expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
+      expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
+      within "#card-#{unmemorized_card2.id}" do
+        click_on '覚えた！'
+        expect(page).to have_content "忘れた！"
+      end
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      within('#menu-open') do
+        click_on '復習モード'
+      end
+      expect(page).to have_content '復習モード'
+      expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
+      expect(page).to have_content 'まだ暗記できていない'
+      expect(page).not_to have_content '次のフレーズへ'
     end
-    click_on 'hamburger_menu_icon'
-    expect(page).to have_content '復習モード'
-    click_on '復習モード'
-    expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).to have_content 'まだ暗記できていない'
-    expect(page).not_to have_content '次のフレーズへ'
   end
 
   it 'can be searched incrementally', :js do
@@ -134,15 +140,18 @@ RSpec.describe "Cards", type: :system do
   end
 
   it 'can use infinite scroll in cards index page', :js do
-    n = 1
-    45.times do
-      FactoryBot.create(:card, ja_phrase: "カード #{n}", user: user)
-      n += 1
+    Capybara.using_session("another_session_in_cards_spec2") do
+      log_in_as user
+      n = 1
+      45.times do
+        FactoryBot.create(:card, ja_phrase: "カード #{n}", user: user)
+        n += 1
+      end
+      visit cards_path
+      expect(page).not_to have_content('カード 1', wait: 10)
+      page.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+      expect(page).to have_content('カード 1', wait: 10)
     end
-    visit cards_path
-    expect(page).not_to have_content('カード 1', wait: 10)
-    page.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-    expect(page).to have_content('カード 1', wait: 10)
   end
 
   it 'spinner show up while card creation', :js do

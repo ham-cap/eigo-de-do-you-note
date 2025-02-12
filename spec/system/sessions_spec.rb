@@ -9,12 +9,15 @@ RSpec.describe "Sessions", type: :system do
   end
 
   it 'a user log out', :js do
-    log_in_as user
-    expect(page).to have_content 'ログインしました'
-    click_on 'hamburger_menu_icon'
-    expect(page).to have_content 'ログアウト'
-    click_on 'ログアウト'
-    expect(page).to have_content 'Home#index'
-    expect(page).to have_content 'ログアウトしました'
+    Capybara.using_session("another_session_in_sessions_spec") do
+      log_in_as user
+      expect(page).to have_content 'ログインしました'
+      find_by_id('menu-close').click
+      within "#menu-open" do
+        click_on 'ログアウト'
+      end
+      expect(page).to have_content 'Home#index'
+      expect(page).to have_content 'ログアウトしました'
+    end
   end
 end
