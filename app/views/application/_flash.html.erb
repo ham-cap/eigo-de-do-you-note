@@ -1,5 +1,5 @@
 <% if notice %>
-  <div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
+  <div class="fixed inset-x-0 top-[30px] flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
     <div data-controller="flash" data-flash-dismiss-after-value="3000" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-green-400 border-l-4 border-green-700 text-white pointer-events-auto">
       <div class="p-2">
         <div class="flex items-start">
@@ -20,7 +20,7 @@
     </div>
   </div>
 <% elsif alert %>
-  <div class="fixed inset-x-0 top-0 flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
+  <div class="fixed inset-x-0 top-[30px] flex items-end justify-right px-4 py-6 sm:p-6 justify-end z-30 pointer-events-none">
     <div data-controller="flash"  data-flash-dismiss-after-value="3000" class="max-w-sm w-full shadow-lg rounded px-4 py-3 rounded relative bg-red-400 border-l-4 border-red-700 text-white pointer-events-auto">
       <div class="p-2">
         <div class="flex items-start">
