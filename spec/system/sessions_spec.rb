@@ -16,7 +16,7 @@ RSpec.describe "Sessions", type: :system do
       within "#menu-open" do
         click_on 'ログアウト'
       end
-      expect(page).to have_content 'Home#index'
+      expect(page).to have_content '翻訳と記録を同時にしてくれるアプリです。'
       expect(page).to have_content 'ログアウトしました'
     end
   end
