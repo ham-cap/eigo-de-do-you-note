@@ -6,13 +6,13 @@ RSpec.describe "Cards", type: :system do
   describe 'not logged in' do
     it 'visit terms page', :js do
       visit root_path
-      click_on '利用規約'
+      click_on '利用規約', match: :first
       expect(page).to have_css 'h1', text: '利用規約'
     end
 
     it 'visit privacy policy page', :js do
       visit root_path
-      click_on 'プライバシーポリシー'
+      click_on 'プライバシーポリシー', match: :first
       expect(page).to have_css 'h1', text: 'プライバシーポリシー'
     end
   end
