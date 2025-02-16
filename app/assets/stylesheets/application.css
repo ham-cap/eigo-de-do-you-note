@@ -29,7 +29,7 @@
 }
 
 .is-selected {
-  background-color: #6791d1; /* neutral-950 */
-  font-weight: 500; /* font-medium */
-  color: #fafafa; /* neutral-50 */
+  background-color: #21cbca;
+  font-weight: 600;
+  color: #575555;
 }
