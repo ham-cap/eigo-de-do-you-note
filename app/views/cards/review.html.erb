@@ -1,46 +1,46 @@
 <div data-controller="review">
-  <h1 class="font-bold text-4xl flex justify-center font-bold text-4xl my-8">復習モード</h1>
-  <div class="change-visibility-button my-4 flex justify-end mx-8">
-    <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-8 w-32 items-center justify-center rounded-full bg-[#6791d1] px-6 font-medium text-[#fafafa]">英文を表示</button>
+  <h1 class="font-bold text-3xl flex justify-center font-bold my-8">復習モード</h1>
+  <div class="change-visibility-button my-4 flex justify-end">
+    <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 items-center justify-center rounded-full bg-[#21cbca] px-6 font-semibold text-base md:text-lg md:font-medium text-[#fafafa]">英文を表示</button>
   </div>
-  <div id="card-<%= @card.id %>" class="flex flex-col items-center mb-4 mx-8">
-    <div class="a-card-container flex flex-col w-full">
-      <div class="a-card h-24 w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
-        <div class="phrase-pair w-full grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
-          <div class="ja-phrase grid content-center w-full flex justify-center">
+  <div id="card-<%= @card.id %>" class="h-full flex flex-col items-center mb-4">
+    <div class="a-card-container h-full flex flex-col w-full">
+      <div class="a-card h-24 h-full w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
+        <div class="phrase-pair h-full w-full grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
+          <div class="ja-phrase min-h-16 grid content-center w-full flex justify-center text-2xl">
             <p>・<%= link_to @card.ja_phrase, card_path(@card), data: { turbo_frame: '_top' } %></p>
           </div>
-          <div data-review-target="enPhrase" class="en-phrase grid content-center w-full hidden flex justify-center">
+          <div data-review-target="enPhrase" class="en-phrase min-h-16 grid content-center w-full hidden flex justify-center text-2xl">
             <p>・<%= link_to @card.en_phrase, card_path(@card), data: { turbo_frame: '_top' } %></p>
           </div>
         </div>
       </div>
     </div>
     <div class="memorized-button-wrapper flex flex-row-reverse items-center w-1/3">
-      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[2rem] w-full border-2 border-solid border-[#aaaaaa] bg-[#FADC75]">
+      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] w-full rounded-full border-2 border-solid border-[#aaaaaa] bg-[#ffb74d] text-[#575555] font-semibold text-lg">
         <%= link_to @card.memorized_at.nil? ? '覚えた！' : '忘れた！',
                     update_memorized_status_card_path(@card),
                     data: { turbo_method: :patch,
                             memorized_button_target: 'memorizedButton',
                             action: 'click->memorized-button#switchText' },
-                    class: "flex justify-center items-center w-full h-full text-base" %>
+                    class: "flex justify-center items-center w-full h-full" %>
       </div>
     </div>
   </div>
-  <div class="pagination-links flex justify-between mb-8 mx-8">
-    <div class="w-40">
+  <div class="pagination-links flex justify-between mb-8">
+    <div class="w-[45%] md:w-1/4">
       <% if @previous_card %>
-        <div class="previous-page inline-flex h-8 w-full items-center justify-center bg-[#6791d1] font-medium text-[#fafafa]">
-          <%= link_to review_cards_path(id: @previous_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-sm' do %>
+        <div class="previous-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] font-medium text-[#fafafa]">
+          <%= link_to review_cards_path(id: @previous_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
             <span><i class="fa-solid fa-angle-left"></i> 前のフレーズへ</span>
           <% end %>
         </div>
       <% end %>
     </div>
-    <div class="w-40">
+    <div class="w-[45%] md:w-1/4">
       <% if @next_card %>
-        <div class="next-page previous-page inline-flex h-8 w-full items-center justify-center bg-[#6791d1] font-medium text-[#fafafa]">
-          <%= link_to review_cards_path(id: @next_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-sm' do %>
+        <div class="next-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] font-medium text-[#fafafa]">
+          <%= link_to review_cards_path(id: @next_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
             <span>次のフレーズへ <i class="fa-solid fa-angle-right"></i></span>
           <% end %>
         </div>
