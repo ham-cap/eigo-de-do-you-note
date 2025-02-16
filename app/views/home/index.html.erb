@@ -1,4 +1,26 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+<div class="w-full flex flex-col items-center">
+  <div class="w-2/3 md:w-1/2 mt-4">
+    <%= image_tag 'logo_main.png' %>
+  </div>
+  <p class="text-base md:text-xl">
+    翻訳と記録を同時にしてくれるアプリです。
+  </p>
+  <%= render 'login_button_block' %>
+  <p class="justify-self-center text-center font-bold text-lg md:text-3xl">
+    「これって英語でどう言えばいいんだろう？」
+  </p>
+  <p class="my-4 text-base md:text-lg">
+    そう考えてせっかく調べてもすぐに忘れてしまっていませんか？<br>
+    【英語でどういう？ノート】なら<span class="underline underline-offset-4">フレーズの翻訳と保存を同時にしてくれる</span>ので、気になるフレーズをただ入力するだけで、あなただけのフレーズ帳を簡単に作成できます！
+  </p>
+  <div class="features">
+    <h2 class="my-4 text-lg md:text-xl font-bold">特徴１: 書き写す作業をゼロに！翻訳結果をワンクリックで保存！</h2>
+    <p class="my-4 text-base md:text-lg">自動翻訳の結果をその場ですぐに保存できるので、別のメモアプリへコピペしたり、ノートに書き写したりする<span class="underline underline-offset-4">面倒な作業が一切ありません！</span></p>
+    <h2 class="my-4 text-lg md:text-xl font-bold">特徴２: フラッシュカード形式で気軽に復習できる！</h2>
+    <p class="mt-4 text-base md:text-lg">翻訳結果の英文を隠した状態から始まる「復習モード」を使うことで、<span class="underline underline-offset-4">紙の単語カードと同じように気軽に復習をすることができます！</span></p>
+  </div>
+  <p class="mt-16 text-lg md:text-lg">
+    まずは気になるフレーズを翻訳してみましょう！
+  </p>
+  <%= render 'login_button_block' %>
 </div>

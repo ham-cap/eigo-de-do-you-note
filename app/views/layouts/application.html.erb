@@ -20,16 +20,18 @@
 
   <body class="text-[#575555] font-medium text-sm md:text-base max-w-screen-md mx-4 md:mx-auto h-screen flex flex-col">
     <div class="wrapper is-application">
-      <%= render 'application/header/header' %>
-    <div id="flash">
-      <%= render "flash" %>
-    </div>
-    <main>
-      <%= yield %>
-    </main>
-    <div class="footer">
-      <%= render 'application/footer/footer' %>
-    </div>
+      <% unless current_page?(root_path) %>
+        <%= render 'application/header/header' %>
+      <% end %>
+      <div id="flash">
+        <%= render "flash" %>
+      </div>
+      <main>
+        <%= yield %>
+      </main>
+      <div class="footer">
+        <%= render 'application/footer/footer' %>
+      </div>
     </div>
   </body>
 </html>
