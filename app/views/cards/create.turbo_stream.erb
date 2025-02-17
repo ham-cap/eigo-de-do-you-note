@@ -3,3 +3,4 @@
   <%= turbo_frame_tag Card.new, class: "flex flex-col justify-center h-[400px] w-2/3 fixed top-0 left-50 hidden", data: { "creation-form-target": "creationForm" } %>
 <% end %>
 <%= turbo_stream_flash %>
+<%= turbo_stream.remove 'introduction-for-creation' %>
