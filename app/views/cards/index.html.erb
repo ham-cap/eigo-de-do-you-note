@@ -1,5 +1,5 @@
 <div>
-  <h1 class="flex justify-center font-bold text-3xl my-8">フレーズ一覧</h1>
+  <h1 class="flex justify-center font-bold text-xl md:text-3xl my-8">フレーズ一覧</h1>
   <nav class="w-3/5 my-4">
     <ul data-controller="card-filter" class="filters flex justify-start">
       <li class="a-filter is-selected flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0]" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
@@ -41,5 +41,8 @@
       <%= render partial: 'card', collection: @cards %>
       <%= turbo_frame_tag "cards-page-#{@cards.next_page}", loading: :lazy, src: path_to_next_page(@cards) %>
     <% end %>
+  <% end %>
+  <% if @cards.empty? %>
+    <%= render 'instruction_for_card_creation' %>
   <% end %>
 </div>
