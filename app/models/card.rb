@@ -1,9 +1,11 @@
 class Card < ApplicationRecord
+  attr_accessor :input_lang
   belongs_to :user
 
-  validates :ja_phrase, presence: true
+  validates :ja_phrase, presence: true, uniqueness: { scope: :en_phrase }
+  validates :ja_phrase, length: { maximum: 100 }, if: ->(card) { card.input_lang == 'ja' }
   validates :en_phrase, presence: true
-  validates :ja_phrase, uniqueness: { scope: :en_phrase }
+  validates :en_phrase, length: { maximum: 200 }, if: ->(card) { card.input_lang == 'en' }
 
   scope :memorized, -> { where.not(memorized_at: nil) }
   scope :unmemorized, -> { where(memorized_at: nil) }
