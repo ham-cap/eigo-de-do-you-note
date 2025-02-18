@@ -33,13 +33,13 @@ class CardsController < ApplicationController
       config.host = 'https://api-free.deepl.com'
     end
     original_text = card_params[:original_text]
-    inputted_lang = CLD.detect_language(original_text)
-    translation = DeepL.translate original_text, nil, inputted_lang[:code] == 'ja' ? 'EN' : 'JA'
+    input_lang = CLD.detect_language(original_text)[:code]
+    translation = DeepL.translate original_text, nil, input_lang == 'ja' ? 'EN' : 'JA'
 
-    if inputted_lang[:code] == 'ja'
-      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation)
+    if input_lang == 'ja'
+      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation, input_lang:)
     else
-      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text)
+      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text, input_lang:)
     end
 
     if @card.save
