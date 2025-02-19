@@ -1,3 +1,6 @@
+<% set_meta_tags title: 'カードの新規作成' %>
+<% set_meta_tags description: '日本語から英語、あるいは英語から日本語への翻訳と結果の保存ができます。' %>
+
 <h1 class="text-2xl flex justify-center">新規作成</h1>
 <%= turbo_frame_tag @card do %>
   <%= render 'form', card: @card %>

@@ -30,6 +30,8 @@ gem 'kaminari'
 gem 'ransack'
 
 gem 'rails-i18n'
+
+gem 'meta-tags'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
