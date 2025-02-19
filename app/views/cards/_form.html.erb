@@ -9,11 +9,15 @@
       <div class="textarea-container flex justify-center h-1/2">
         <%= form.text_area :original_text, class: "w-3/4 h-full" %>
       </div>
-      <% @card.errors.full_messages_for(:ja_phrase).each do |message| %>
-        <div class="text-red-500"><%= message %></div>
-      <% end %>
-      <% @card.errors.full_messages_for(:en_phrase).each do |message| %>
-        <div class="text-red-500"><%= message %></div>
+      <% if @card.errors[:base].any? %>
+        <div class="text-red-500"><%= @card.errors[:base].first %></div>
+      <% else %>
+        <% @card.errors.messages[:ja_phrase].each do |message| %>
+          <div class="text-red-500"><%= message %></div>
+        <% end %>
+        <% @card.errors.messages[:en_phrase].each do |message| %>
+          <div class="text-red-500"><%= message %></div>
+        <% end %>
       <% end %>
       <div class="form-buttons grid justify-items-center">
         <div class="w-full h-full flex items-center flex flex-col">

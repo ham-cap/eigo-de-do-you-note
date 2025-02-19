@@ -26,7 +26,7 @@ RSpec.describe "Cards", type: :system do
     find('.creation_icon').click
     fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
-    expect(page).to have_content('Card was successfully created.', wait: 10)
+    expect(page).to have_content('カードを作成しました', wait: 10)
     expect(page).to have_content('フレーズ一覧', wait: 10)
     expect(page).to have_content('本日は晴天なり', wait: 10)
     expect(page).to have_content('testing a microphone', wait: 10)
