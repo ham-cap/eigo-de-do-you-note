@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      card:
+        ja_phrase: "フレーズ"
+        en_phrase: "フレーズ"
+  errors:
+    messages:
+      blank: "%{attribute}を入力してください。"
+      too_long: "日本語なら100文字、英語なら200文字以内で入力してください"
+      taken: "この%{attribute}はすでに存在します。"

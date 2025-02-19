@@ -2,6 +2,7 @@ class Card < ApplicationRecord
   attr_accessor :input_lang
   belongs_to :user
 
+  validate :either_ja_or_en_must_be_present
   validates :ja_phrase, presence: true, uniqueness: { scope: :en_phrase }
   validates :ja_phrase, length: { maximum: 100 }, if: ->(card) { card.input_lang == 'ja' }
   validates :en_phrase, presence: true
@@ -17,6 +18,14 @@ class Card < ApplicationRecord
 
     def ransackable_associations(auth_object = nil)
       %w[user]
+    end
+  end
+
+  private
+
+  def either_ja_or_en_must_be_present
+    if ja_phrase.blank? || en_phrase.blank?
+      errors.add(:base, 'フレーズを入力してください。')
     end
   end
 end

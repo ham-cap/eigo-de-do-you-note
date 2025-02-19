@@ -43,7 +43,7 @@ class CardsController < ApplicationController
     end
 
     if @card.save
-      flash.now.notice = 'Card was successfully created.'
+      flash.now.notice = 'カードを作成しました'
     else
       render :new, status: :unprocessable_entity
     end
@@ -74,7 +74,7 @@ class CardsController < ApplicationController
 
   def update
     if @card.update(card_params)
-      flash.now.notice = 'Card was successfully updated.'
+      flash.now.notice = 'カードを更新しました'
     else
       render :edit, status: :unprocessable_entity
     end
