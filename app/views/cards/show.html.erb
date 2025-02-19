@@ -1,3 +1,6 @@
+<% set_meta_tags title: 'カードの閲覧' %>
+<% set_meta_tags description: '記録しておいたカードを個別に閲覧できます。' %>
+
   <h1 class="flex justify-center font-bold text-3xl my-8">詳細</h1>
   <div>
     <%= render partial: 'card', locals: { card: @card, from_show: true } %>
