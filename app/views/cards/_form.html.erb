@@ -3,11 +3,11 @@
     <%= form_with model: card, class: "h-full flex flex-col" do |form| %>
       <div class="form-label-container flex justify-center">
         <div class="form-label text-base md:text-2xl w-3/4 my-2">
-          <%= form.label :original_text, '翻訳したいフレーズ' %>
+          <%= form.label :original_text, '翻訳したいフレーズを入力' %>
         </div>
       </div>
       <div class="textarea-container flex justify-center h-1/2">
-        <%= form.text_area :original_text, class: "w-3/4 h-full" %>
+        <%= form.text_area :original_text, class: "w-3/4 h-full placeholder:italic placeholder:text-gray-400", placeholder: "例: 思い立ったが吉日" %>
       </div>
       <% if @card.errors[:base].any? %>
         <div class="text-red-500"><%= @card.errors[:base].first %></div>
@@ -21,10 +21,10 @@
       <% end %>
       <div class="form-buttons grid justify-items-center">
         <div class="w-full h-full flex items-center flex flex-col">
-          <div class="submit-button w-1/2 mt-2 mb-2 grid justify-items-center rounded-full border border-gray-500 bg-[#21cbca] text-[#fafafa]">
+          <div class="submit-button w-1/2 mt-2 mb-2 grid justify-items-center rounded-full border border-gray-500 bg-[#21cbca] hover:bg-[#1db5b4] text-[#fafafa]">
             <%= form.submit '翻訳する', class: 'w-full h-full flex justify-center cursor-pointer md:text-lg' %>
           </div>
-          <div data-action="click->creation-form#changeVisibility" class="cancel-button w-1/2 grid justify-content-center justify-items-center rounded-full border border-gray-500 text-gray-500">
+          <div data-action="click->creation-form#changeVisibility" class="cancel-button w-1/2 grid justify-content-center justify-items-center rounded-full border border-gray-500 text-gray-500 hover:bg-gray-100">
             <%= link_to 'キャンセル', cards_path, class: 'w-full h-full flex justify-center md:text-lg' %>
           </div>
         </div>
