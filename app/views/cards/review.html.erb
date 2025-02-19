@@ -7,7 +7,7 @@
     <%= render 'instruction_for_review' %>
   <% else %>
     <div class="change-visibility-button my-4 flex justify-end">
-      <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 items-center justify-center rounded-full bg-[#21cbca] px-6 font-semibold text-base md:text-lg md:font-medium text-[#fafafa]">英文を表示</button>
+      <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 items-center justify-center rounded-full bg-[#21cbca] hover:bg-[#1db5b4] px-6 font-semibold text-base md:text-lg md:font-medium text-[#fafafa]">英文を表示</button>
     </div>
     <div id="card-<%= @card.id %>" class="h-full flex flex-col items-center mb-4">
       <div class="a-card-container h-full flex flex-col w-full">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="memorized-button-wrapper flex flex-row-reverse items-center w-1/3">
-        <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] w-full rounded-full border-2 border-solid border-[#aaaaaa] bg-[#ffb74d] text-[#575555] font-semibold text-lg">
+        <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] w-full rounded-full border-2 border-solid border-[#aaaaaa] bg-[#ffb74d] hover:bg-[#f79e1b] text-[#575555] font-semibold text-lg">
           <%= link_to @card.memorized_at.nil? ? '覚えた！' : '忘れた！',
                       update_memorized_status_card_path(@card),
                       data: { turbo_method: :patch,
@@ -36,7 +36,7 @@
     <div class="pagination-links flex justify-between mb-8">
       <div class="w-[45%] md:w-1/4">
         <% if @previous_card %>
-          <div class="previous-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] font-medium text-[#fafafa]">
+          <div class="previous-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] hover:bg-[#1db5b4] font-medium text-[#fafafa]">
             <%= link_to review_cards_path(id: @previous_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
               <span><i class="fa-solid fa-angle-left"></i> 前のフレーズへ</span>
             <% end %>
@@ -45,7 +45,7 @@
       </div>
       <div class="w-[45%] md:w-1/4">
         <% if @next_card %>
-          <div class="next-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] font-medium text-[#fafafa]">
+          <div class="next-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] hover:bg-[#1db5b4] font-medium text-[#fafafa]">
             <%= link_to review_cards_path(id: @next_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
               <span>次のフレーズへ <i class="fa-solid fa-angle-right"></i></span>
             <% end %>

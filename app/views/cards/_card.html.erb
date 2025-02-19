@@ -11,12 +11,12 @@
           </div>
         </div>
       </div>
-      <div class="edit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+      <div class="edit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg hover:bg-gray-100">
         <%= link_to '編集する', edit_card_path(card, local_assigns[:from_show] ? { from_show: from_show } : nil), data: { turbo_frame: dom_id(card) }, class: "flex justify-center w-full h-full"%>
       </div>
     </div>
     <div class="memorized-button-wrapper w-full flex flex-row items-center text-xl md:text-lg md:ml-4 md:mb-8 md:w-1/6">
-      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] md:h-[5rem] w-full rounded-full border-1 border-solid bg-[#ffb74d] text-[#575555] font-semibold">
+      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] md:h-[5rem] w-full rounded-full border-1 border-solid bg-[#ffb74d] hover:bg-[#f79e1b] text-[#575555] font-semibold">
         <%= link_to card.memorized_at.nil? ? '覚えた！' : '忘れた！',
                     update_memorized_status_card_path(card),
                     data: { turbo_method: :patch,

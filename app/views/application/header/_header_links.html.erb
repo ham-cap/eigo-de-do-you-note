@@ -1,6 +1,6 @@
 <div class="header-current-user flex items-center justify-center">
   <% if current_user %>
-    <%= image_tag current_user.image, title: 'user_icon', class: 'w-10 h-10 rounded-full object-cover' %>
+    <%= image_tag current_user.image, title: 'ログイン中のユーザーがGoogleアカウントで設定しているプロフィール画像', class: 'w-10 h-10 rounded-full object-cover' %>
   <% else  %>
     <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
   <% end %>
@@ -11,7 +11,7 @@
        class="menu relative"
        id="menu">
     <button id="menu-close" data-action="dropdown#toggle:stop" class="p-2 rounded-full flex items-center hover:bg-gray-300">
-      <%= image_tag 'hamburger_menu_icon.png', alt: 'hamburger_menu_icon', class: 'w-10 h-10' %>
+      <%= image_tag 'hamburger_menu_icon.png', alt: 'メニューアイコン', class: 'w-10 h-10' %>
     </button>
     <div id="menu-open" data-dropdown-target="menu" class="header-dropdown absolute top-full right-0 mt-2 w-48 bg-white rounded-lg z-50 hidden">
       <%= render 'application/header/menu' %>
