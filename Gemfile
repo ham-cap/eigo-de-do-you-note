@@ -74,4 +74,4 @@ group :test do
   gem 'launchy'
 end
 
-gem "dockerfile-rails", ">= 1.7", :group => :development
+gem 'dockerfile-rails', '>= 1.7', group: :development
