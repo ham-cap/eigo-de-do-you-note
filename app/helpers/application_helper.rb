@@ -16,7 +16,7 @@ module ApplicationHelper
         site_name: '英語でどういう？ノート',
         description: :description,
         image: image_url('ogp.png'),
-        url: 'https://.com',
+        url: 'https://do-you-know-the-phrase.com',
         local: 'ja-JP'
       },
       twitter: {
