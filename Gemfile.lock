@@ -106,6 +106,8 @@ GEM
       reline (>= 0.3.8)
     deepl-rb (3.2.0)
     diff-lcs (1.5.1)
+    dockerfile-rails (1.7.6)
+      rails (>= 3.0.0)
     drb (2.2.1)
     erubi (1.13.1)
     factory_bot (6.5.0)
@@ -415,6 +417,7 @@ DEPENDENCIES
   cld
   debug
   deepl-rb
+  dockerfile-rails (>= 1.7)
   factory_bot_rails
   importmap-rails
   kaminari
