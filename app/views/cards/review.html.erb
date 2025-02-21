@@ -14,10 +14,10 @@
         <div class="a-card h-24 h-full w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
           <div class="phrase-pair h-full w-full grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
             <div class="ja-phrase min-h-16 grid content-center w-full flex justify-center text-2xl">
-              <p>・<%= link_to @card.ja_phrase, card_path(@card), data: { turbo_frame: '_top' } %></p>
+              <p><%= @card.ja_phrase %></p>
             </div>
             <div data-review-target="enPhrase" class="en-phrase min-h-16 grid content-center w-full hidden flex justify-center text-2xl">
-              <p>・<%= link_to @card.en_phrase, card_path(@card), data: { turbo_frame: '_top' } %></p>
+              <p><%= @card.en_phrase %></p>
             </div>
           </div>
         </div>

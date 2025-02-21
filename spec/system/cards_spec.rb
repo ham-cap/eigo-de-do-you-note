@@ -32,17 +32,6 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('testing a microphone', wait: 10)
   end
 
-  it 'display a details page of cards', :js do
-    visit cards_path
-    expect(page).to have_content 'フレーズ一覧'
-    click_on cards[0].ja_phrase
-    expect(page).to have_content '詳細'
-    expect(page).to have_content cards[0].ja_phrase
-    expect(page).to have_content cards[0].en_phrase
-    expect(page).not_to have_content cards[1].ja_phrase
-    expect(page).not_to have_content cards[1].en_phrase
-  end
-
   it 'deletes a card', :js do
     visit card_path(cards[0])
     expect(page).to have_content cards[0].ja_phrase
