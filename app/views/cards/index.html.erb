@@ -27,7 +27,7 @@
           }
         }) do |f| %>
       <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "text-[#5D6368]" %>
-      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368] placeholder:italic placeholder:text-gray-400", placeholder: "日本語でも英語でも1文字から検索できます"%>
+      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368] placeholder:italic placeholder:text-gray-400", placeholder: "例: 思い立ったが吉日"%>
       <%= hidden_field_tag :target, @target %>
     <% end %>
   </div>
