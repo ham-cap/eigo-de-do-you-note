@@ -8,12 +8,12 @@
       <li class="a-filter is-selected flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] hover:bg-[#87faf9]" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to '全て', cards_path, data: {turbo_frame: "cards"}, class: 'flex justify-center items-center w-full h-full'%>
       </li>
-      <li class="a-filter flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] hover:bg-[#87faf9]" id="filter-memorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <li class="a-filter flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] text-[10px] md:text-base hover:bg-[#87faf9]" id="filter-memorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to cards_path(target: 'memorized'), data: {turbo_frame: "cards"}, class: 'flex justify-center items-center w-full h-full' do %>
           <i class="fa-solid fa-check fa-fw" style="color: #ffb74d;"></i>覚えた！
         <% end %>
       </li>
-      <li class="a-filter flex items-center justify-center w-[35%] h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] text-[10px] md:text-base hover:bg-[#87faf9]" id="filter-unmemorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <li class="a-filter flex items-center justify-center w-[35%] h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] text-[8px] md:text-base hover:bg-[#87faf9]" id="filter-unmemorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to cards_path(target: 'unmemorized'), data: {turbo_frame: "cards"}, class: 'flex justify-center items-center w-full h-full' do %>
            <i class="fa-solid fa-check fa-fw"></i>覚えていない
          <% end %>
@@ -31,7 +31,7 @@
           }
         }) do |f| %>
       <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "text-[#5D6368]" %>
-      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368] placeholder:italic placeholder:text-gray-400", placeholder: "例: 思い立ったが吉日"%>
+      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368] placeholder:italic placeholder:text-gray-400 placeholder:text-xs placeholder:md:text-base", placeholder: "例: 思い立ったが吉日"%>
       <%= hidden_field_tag :target, @target %>
     <% end %>
   </div>
