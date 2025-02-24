@@ -14,13 +14,13 @@
         </div>
       </div>
       <div class="buttons flex flex-col space-y-2">
-        <div class="submit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+        <div class="submit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg hover:bg-gray-100">
           <%= form.submit '更新する', class: "w-full h-full cursor-pointer" %>
         </div>
-        <div class="cancel-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+        <div class="cancel-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg hover:bg-gray-100">
           <%= link_to 'キャンセル', @card, class: "w-full h-full flex justify-center items-center cursor-pointer" %>
         </div>
-        <div class="delete-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg">
+        <div class="delete-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg hover:bg-gray-100">
           <%= link_to '削除する', card_path(@card, @from_show ? { from_show: @from_show } : nil),
                                   data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？', turbo_frame: '_top' },
                                   class: "w-full h-full flex justify-center items-center cursor-pointer" %>
