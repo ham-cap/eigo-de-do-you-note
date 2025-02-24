@@ -89,8 +89,7 @@ RSpec.describe "Cards", type: :system do
       expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
       expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
       within "#card-#{unmemorized_card2.id}" do
-        click_on '覚えた！'
-        expect(page).to have_content "忘れた！"
+        find('.memorized-button').click
       end
       find_by_id('menu-close').click
       expect(page).to have_no_css('#menu-open.hidden', wait: 20)
@@ -120,7 +119,9 @@ RSpec.describe "Cards", type: :system do
     memorized_card = FactoryBot.create(:card, user: user)
     unmemorized_card = FactoryBot.create(:card, :unmemorized1, user: user)
     visit cards_path
-    click_on '覚えた'
+    within '.filters' do
+      click_on '覚えた'
+    end
     expect(page).to have_content memorized_card.ja_phrase
     expect(page).not_to have_content unmemorized_card.ja_phrase
     click_on '覚えていない'

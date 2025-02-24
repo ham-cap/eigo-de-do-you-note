@@ -16,13 +16,13 @@
       </div>
     </div>
     <div class="memorized-button-wrapper w-full flex flex-row items-center text-xl md:text-lg md:ml-4 md:mb-8 md:w-1/6">
-      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] md:h-[5rem] w-full rounded-full border-1 border-solid bg-[#ffb74d] hover:bg-[#f79e1b] text-[#575555] font-semibold">
-        <%= link_to card.memorized_at.nil? ? '覚えた！' : '忘れた！',
-                    update_memorized_status_card_path(card),
-                    data: { turbo_method: :patch,
-                            memorized_button_target: 'memorizedButton',
-                            action: 'click->memorized-button#switchText' },
-                    class: "flex justify-center items-center w-full h-full" %>
+      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] md:h-[5rem] w-full rounded-full border-2 border-solid bg-white hover:bg-gray-50 text-[#575555] relative">
+        <%= button_to update_memorized_status_card_path(card),
+                      method: :patch,
+                      data: { memorized_button_target: 'memorizedButton', action: 'click->memorized-button#switchText' },
+                      class: "flex justify-center items-center w-full h-full absolute inset-0" do %>
+          <%= card.memorized_at.nil? ? image_tag('check_mark_gray.png', alt: '覚えていない状態のチェックマーク', class: 'w-10 h-10') : image_tag('check_mark.png', alt: '覚えた状態のチェックマーク', class: 'w-10 h-10') %>
+        <% end %>
       </div>
     </div>
   </div>

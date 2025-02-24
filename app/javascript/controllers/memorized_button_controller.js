@@ -5,9 +5,27 @@ export default class extends Controller {
   static targets = ["memorizedButton"];
 
   switchText() {
-    this.memorizedButtonTarget.textContent =
-      this.memorizedButtonTarget.textContent === "覚えた！"
-        ? "忘れた！"
-        : "覚えた！";
+    if (
+      this.memorizedButtonTarget.children[0].alt ===
+      "覚えていない状態のチェックマーク"
+    ) {
+      this.memorizedButtonTarget.innerHTML = "";
+      this.memorizedButtonTarget.innerHTML =
+        '<img src="/assets/check_mark.png" alt="覚えた状態チェックマーク" class="w-10 h-10">';
+      this.memorizedButtonTarget.classList.add(
+        "bg-white",
+        "rounded-full",
+        "hover:bg-gray-50"
+      );
+    } else {
+      this.memorizedButtonTarget.innerHTML = "";
+      this.memorizedButtonTarget.innerHTML =
+        '<img src="/assets/check_mark_gray.png" alt="覚えていない状態のチェックマーク" class="w-10 h-10">';
+      this.memorizedButtonTarget.classList.add(
+        "bg-white",
+        "rounded-full",
+        "hover:bg-gray-50"
+      );
+    }
   }
 }
