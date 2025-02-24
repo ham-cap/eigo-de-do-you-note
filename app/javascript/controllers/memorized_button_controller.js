@@ -12,12 +12,20 @@ export default class extends Controller {
       this.memorizedButtonTarget.innerHTML = "";
       this.memorizedButtonTarget.innerHTML =
         '<img src="/assets/check_mark.png" alt="覚えた状態チェックマーク" class="w-10 h-10">';
-      this.memorizedButtonTarget.classList.add("bg-white", "rounded-full");
+      this.memorizedButtonTarget.classList.add(
+        "bg-white",
+        "rounded-full",
+        "hover:bg-gray-50"
+      );
     } else {
       this.memorizedButtonTarget.innerHTML = "";
       this.memorizedButtonTarget.innerHTML =
         '<img src="/assets/check_mark_gray.png" alt="覚えていない状態のチェックマーク" class="w-10 h-10">';
-      this.memorizedButtonTarget.classList.add("bg-white", "rounded-full");
+      this.memorizedButtonTarget.classList.add(
+        "bg-white",
+        "rounded-full",
+        "hover:bg-gray-50"
+      );
     }
   }
 }
