@@ -1,6 +1,6 @@
 <%= turbo_frame_tag card do %>
   <div id="card-<%= card.id %>" class="flex flex-col md:flex-row mb-8">
-    <div class="a-card-container flex flex-col w-full mb-2">
+    <div class="a-card-container flex flex-col w-full mb-2 md:basis-5/6">
       <div class="a-card min-h-24 w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
         <div class="phrase-pair w-full h-auto grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
           <div class="ja-phrase grid content-center w-full h-auto text-xl">
@@ -15,15 +15,13 @@
         <%= link_to '編集する', edit_card_path(card, local_assigns[:from_show] ? { from_show: from_show } : nil), data: { turbo_frame: dom_id(card) }, class: "flex justify-center w-full h-full"%>
       </div>
     </div>
-    <div class="memorized-button-wrapper w-full flex flex-row items-center text-xl md:text-lg md:ml-4 md:mb-8 md:w-1/6">
-      <div data-controller="memorized-button" class="memorized-button flex justify-center h-[3rem] md:h-[5rem] w-full rounded-full border-2 border-solid bg-white hover:bg-gray-50 text-[#575555] relative">
-        <%= button_to update_memorized_status_card_path(card),
-                      method: :patch,
-                      data: { memorized_button_target: 'memorizedButton', action: 'click->memorized-button#switchText' },
-                      class: "flex justify-center items-center w-full h-full absolute inset-0" do %>
-          <%= card.memorized_at.nil? ? image_tag('check_mark_gray.png', alt: '覚えていない状態のチェックマーク', class: 'w-10 h-10') : image_tag('check_mark.png', alt: '覚えた状態のチェックマーク', class: 'w-10 h-10') %>
-        <% end %>
-      </div>
+    <div data-controller="memorized-button" class="memorized-button md:basis-1/6 flex flex-col justify-center">
+      <%= button_to update_memorized_status_card_path(card),
+                    method: :patch,
+                    data: { memorized_button_target: 'memorizedButton', action: 'click->memorized-button#switchText' },
+                    class: "flex justify-center items-center block text-xl md:text-lg h-[3rem] md:h-[5rem] md:mb-12 md:ml-4 w-full rounded-full border-2 border-solid bg-white hover:bg-gray-50 text-[#575555]" do %>
+        <%= card.memorized_at.nil? ? image_tag('check_mark_gray.png', alt: '覚えていない状態のチェックマーク', class: 'w-10 h-10') : image_tag('check_mark.png', alt: '覚えた状態のチェックマーク', class: 'w-10 h-10') %>
+      <% end %>
     </div>
   </div>
 <% end %>
