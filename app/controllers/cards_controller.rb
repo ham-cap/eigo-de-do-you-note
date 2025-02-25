@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   before_action :authorize_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @target = params[:target]
+    @target = params[:target] || 'all'
     @target = 'all' unless target_allowlist.include?(@target)
 
     @cards =
