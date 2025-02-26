@@ -1,0 +1,7 @@
+# see https://zenn.dev/batacon/articles/e9b4a88ede2889#3.-google-api%E3%81%AE%E8%A8%AD%E5%AE%9A
+# redirect URL example: http://localhost:3000/auth/google_oauth2/callback
+# also see https://www.deepl.com/en/pro-api
+
+GOOGLE_CLIENT_ID="Your_client_id"
+GOOGLE_CLIENT_SECRET="Your_client_secret"
+DEEPL_API_KEY="Your_deepl_api_key"
