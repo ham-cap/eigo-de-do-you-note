@@ -1,25 +1,29 @@
 # 英語でどういう？ノート
 
-![logo](app/assets/images/ogp.png)
-
-**英語学習の手間を省いて効率化！**
-**気になるフレーズを調べるだけで、あなただけのフレーズ集を簡単に作成できます!**
+![ロゴ](app/assets/images/ogp.png)
 
 ## 概要
+### 「これって英語でどう言えばいいんだろう？」
+そう考えてせっかく調べてもすぐに忘れてしまっていませんか？
 
-FlipPhrasesは英語学習者向けのフラッシュカード作成支援サービスです。
-せっかく英語のフレーズを調べても、記録しておくのが面倒で復習の機会を作ることができず、
-すぐに忘れてしまうという方におすすめです。
+「英語でどういう？ノート」なら、フレーズの翻訳と記録を同時にしてくれるので、気になるフレーズをただ入力するだけであなただけのフレーズ帳を簡単に作成できます！
 
-## 【特徴1】書き写す作業ゼロ！翻訳結果をワンクリックで保存！
+**例えば、偉人の名言を英語でどういうのか翻訳してストックしておくこともできます！**
 
-自動翻訳の結果をその場ですぐに保存できるので、別のメモアプリへコピペしたり、
-ノートやカードに書き写したりする面倒な作業が一切ありません！
 
-## 【特徴2】フラッシュカード形式で気軽に復習！
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/b0656672-1a7d-4ab4-b30b-067efce757ee" />
 
-翻訳結果は原文とあわせてフラッシュカード形式で保存されるため、紙の単語カードと同じように、
-たくさんのフレーズをまとめてテンポよく復習できます。
+## 特徴１：　書き写す作業をゼロに！翻訳結果をワンクリックで保存！
+自動翻訳の結果をその場ですぐに保存できるので、別のメモアプリへコピペしたり、ノートやカードに書き写したりする**面倒な作業が一切ありません！**
+
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/32dd7d82-1d3a-4771-a841-d7ae28490ae4" />
+
+
+## 【特徴2】単語カード形式で気軽に復習！
+翻訳結果の英文を隠した状態から始まる「復習モード」を使うことで、**紙の単語カードと同じように気軽に復習をすることができます！**
+どんどん覚えてチェックを入れていきましょう！
+
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/81bfad13-ea0e-41c5-b742-e8f6fa8f6991" />
 
 ## URL
 
@@ -30,9 +34,18 @@ https://eigo-de-do-you-note.fly.dev
 ### カードの新規作成
 
 1. 画面右下にある「＋」ボタンを押して翻訳画面を開く。
-1. 翻訳したい日本語または英語のフレーズを入力し、「翻訳する」ボタンを押す。（日本語は100文字、英語はスペースを含む200文字まで翻訳できます。）
-1. 入力したフレーズと翻訳結果が一枚のカードに記録されます。あとで復習モードで見返して記憶に定着したカードは、右側にあるボタンを押してチェックしましょう。復習モードで出題されなくなります。
-1. また、一度覚えたものでも時間が経って忘れてしまった場合は、チェックを外せばまた復習モードで出題されるようになるので何度でも繰り返し学習できます。
+   
+   <img width="50%" alt="image" src="https://github.com/user-attachments/assets/8ecc24c5-fc04-4d45-bfae-d516939e2ef2" />
+
+2. 翻訳したい日本語または英語のフレーズを入力し、「翻訳する」ボタンを押す。（日本語は100文字、英語はスペースを含む200文字まで翻訳できます。）
+   
+   <img width="50%" alt="image" src="https://github.com/user-attachments/assets/32dd7d82-1d3a-4771-a841-d7ae28490ae4" />
+
+3. 入力したフレーズと翻訳結果が一枚のカードに記録されます。あとで復習モードで見返して記憶に定着したカードは、右側にあるボタンを押してチェックしましょう。復習モードで出題されなくなります。
+
+   <img width="50%" alt="image" src="https://github.com/user-attachments/assets/d4510bdb-b294-4d74-ad79-256e002dba83" />
+
+5. また、一度覚えたものでも時間が経って忘れてしまった場合は、チェックを外せばまた復習モードで出題されるようになるので何度でも繰り返し学習できます。
 
 ### 復習モード
 
@@ -49,39 +62,32 @@ https://eigo-de-do-you-note.fly.dev
 - Hotwire
 
 ## 開発時のセットアップ・起動
-
-このアプリケーションでは環境変数の管理に[direnv](https://github.com/direnv/direnv)というツールを使用します。
-以下の手順はシェルに`zsh`を使用している場合のものですので、`zsh`と記載のある箇所は適宜お使いのシェルに
-読み替えていただきますようお願いいたします。
-
-なお、必要な環境変数は`GOOGLE_CLIENT_ID`、`GOOGLE_CLIENT_SECRET`、`DEEPL_API_KEY`の3つです。
-それぞれをご用意のうえ`.envrc`に追記してご利用ください。
-
-### direnvをインストール
-
-```
-$ brew install direnv
-```
-
-`.zshrc`に`eval "$(direnv hook zsh)"`を追記した後、`.zshrc`を再読み込み。
-
-```
-$ vi ~/.zshrc #「eval "$(direnv hook zsh)"」を追記
-$ source ~/.zshrc
-```
-
 ### セットアップ
 
 ```
 $ git clone https://github.com/ham-cap/eigo-de-do-you-note.git
 $ cd eigo-de-do-you-note
-$ cp .envrc.example .envrc
-$ vi .envrc # GOOGLE_CLIENT_ID・GOOGLE_CLIENT_SECRET・DEEPL_API_KEYを追記
 $ bin/setup
 ```
-
 ### 起動
-
 ```
 $ bin/dev
+```
+上記を実行後、`http://localhost:3000`にアクセスして以下のようなトップページが表示されれば成功です。
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/07f042de-0270-4bb2-8e2c-9984dedd5142" />
+
+
+### ログインおよび翻訳機能に必要な環境変数の設定について
+このアプリでのログイン処理と翻訳機能の使用には環境変数の設定が必要です。
+それぞれをご用意のうえ`.env`に追記してご利用ください。
+| 名称 | 備考 |
+| --- | --- |
+| GOOGLE_CLIENT_ID | GoogleのクライアントID |
+| GOOGLE_CLIENT_SECRET | Googleのクライアントシークレット |
+| DEEPL_API_KEY | DeepLの翻訳APIキー |
+
+```
+$ cd eigo-de-do-you-note
+$ cp .envrc.example .envrc
+$ vi .envrc # GOOGLE_CLIENT_ID・GOOGLE_CLIENT_SECRET・DEEPL_API_KEYを追記
 ```
