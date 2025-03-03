@@ -28,20 +28,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    DeepL.configure do |config|
-      config.auth_key = ENV['DEEPL_API_KEY']
-      config.host = 'https://api-free.deepl.com'
-    end
-    original_text = card_params[:original_text]
-    input_lang = CLD.detect_language(original_text)[:code]
-    translation = DeepL.translate original_text, nil, input_lang == 'ja' ? 'EN' : 'JA'
-
-    if input_lang == 'ja'
-      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation, input_lang:)
-    else
-      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text, input_lang:)
-    end
-
+    @card = Card.generate_a_translated_and_source_text_pair(card_params[:original_text], current_user)
     if @card.save
       flash.now.notice = 'カードを作成しました'
     else
