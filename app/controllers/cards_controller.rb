@@ -41,7 +41,7 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
-    flash.now.notice = '削除しました'
+    flash.now.notice = 'カードを削除しました'
 
     respond_to do |format|
       if params[:from_show]
@@ -67,7 +67,7 @@ class CardsController < ApplicationController
   def review
     cards = current_user.cards.unmemorized.order(created_at: :desc)
     if params[:id]
-      @card = Card.find(params[:id])
+      @card = current_user.cards.find(params[:id])
       @next_card = cards.where('id < ?', @card.id).first
       @previous_card = cards.where('id > ?', @card.id).last
     else
@@ -77,7 +77,7 @@ class CardsController < ApplicationController
   end
 
   def update_memorized_status
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     if @card.memorized_at.nil?
       @card.update(memorized_at: Time.current)
     else
@@ -97,7 +97,7 @@ class CardsController < ApplicationController
   end
 
   def target_allowlist
-    target_allowlist = %w[all memorized unmemorized]
+    %w[all memorized unmemorized]
   end
 
   def set_card
