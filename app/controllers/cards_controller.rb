@@ -37,11 +37,9 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find(params[:id])
   end
 
   def destroy
-    @card = Card.find(params[:id])
     @card.destroy
     flash.now.notice = '削除しました'
 
@@ -55,7 +53,6 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = Card.find(params[:id])
     @from_show = params[:from_show]
   end
 
@@ -104,7 +101,7 @@ class CardsController < ApplicationController
   end
 
   def set_card
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
   end
 
   def authorize_user
