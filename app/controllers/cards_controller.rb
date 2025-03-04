@@ -64,15 +64,6 @@ class CardsController < ApplicationController
     end
   end
 
-  def update_memorized_status
-    @card = current_user.cards.find(params[:id])
-    if @card.memorized_at.nil?
-      @card.update(memorized_at: Time.current)
-    else
-      @card.update(memorized_at: nil)
-    end
-  end
-
   private
 
   def card_params

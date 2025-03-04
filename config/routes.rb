@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :cards do
     get 'review', to: 'cards/reviews#index', on: :collection
     member do
-      patch :update_memorized_status
+      patch :update_memorized_status, to: 'cards/memorized_buttons#update'
     end
   end
   resource :user, only: :destroy
