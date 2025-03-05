@@ -1,5 +1,5 @@
 {
-  "name": "flip-phrases",
+  "name": "eigo-de-do-you-note",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ham-cap/flip-phrases.git"
+    "url": "git+https://github.com/ham-cap/eigo-de-do-you-note.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ham-cap/flip-phrases/issues"
+    "url": "https://github.com/ham-cap/eigo-de-do-you-note/issues"
   },
-  "homepage": "https://github.com/ham-cap/flip-phrases#readme",
+  "homepage": "https://github.com/ham-cap/eigo-de-do-you-note#readme",
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "eslint": "^9.16.0",
