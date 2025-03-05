@@ -28,20 +28,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    DeepL.configure do |config|
-      config.auth_key = ENV['DEEPL_API_KEY']
-      config.host = 'https://api-free.deepl.com'
-    end
-    original_text = card_params[:original_text]
-    input_lang = CLD.detect_language(original_text)[:code]
-    translation = DeepL.translate original_text, nil, input_lang == 'ja' ? 'EN' : 'JA'
-
-    if input_lang == 'ja'
-      @card = current_user.cards.build(ja_phrase: original_text, en_phrase: translation, input_lang:)
-    else
-      @card = current_user.cards.build(ja_phrase: translation, en_phrase: original_text, input_lang:)
-    end
-
+    @card = Card.generate_a_translated_and_source_text_pair(card_params[:original_text], current_user)
     if @card.save
       flash.now.notice = 'カードを作成しました'
     else
@@ -50,13 +37,11 @@ class CardsController < ApplicationController
   end
 
   def show
-    @card = Card.find(params[:id])
   end
 
   def destroy
-    @card = Card.find(params[:id])
     @card.destroy
-    flash.now.notice = '削除しました'
+    flash.now.notice = 'カードを削除しました'
 
     respond_to do |format|
       if params[:from_show]
@@ -68,7 +53,6 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = Card.find(params[:id])
     @from_show = params[:from_show]
   end
 
@@ -80,44 +64,22 @@ class CardsController < ApplicationController
     end
   end
 
-  def review
-    cards = current_user.cards.unmemorized.order(created_at: :desc)
-    if params[:id]
-      @card = Card.find(params[:id])
-      @next_card = cards.where('id < ?', @card.id).first
-      @previous_card = cards.where('id > ?', @card.id).last
-    else
-      @card = cards.first
-      @next_card = cards.second
-    end
-  end
-
-  def update_memorized_status
-    @card = Card.find(params[:id])
-    if @card.memorized_at.nil?
-      @card.update(memorized_at: Time.current)
-    else
-      @card.update(memorized_at: nil)
-    end
-  end
-
   private
 
   def card_params
     params.require(:card).permit(
       :original_text,
       :ja_phrase,
-      :en_phrase,
-      :memorized_at
+      :en_phrase
     )
   end
 
   def target_allowlist
-    target_allowlist = %w[all memorized unmemorized]
+    %w[all memorized unmemorized]
   end
 
   def set_card
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
   end
 
   def authorize_user
