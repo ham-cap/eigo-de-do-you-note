@@ -1,6 +1,6 @@
 <div class="header-current-user flex items-center justify-center">
   <% if current_user %>
-    <%= image_tag current_user.image, title: 'ログイン中のユーザーがGoogleアカウントで設定しているプロフィール画像', class: 'w-10 h-10 rounded-full object-cover' %>
+    <%= image_tag current_user.image.presence || asset_path('default_user_icon.png'), title: 'ログイン中のユーザーがGoogleアカウントで設定しているプロフィール画像', class: 'w-10 h-10 rounded-full object-cover' %>
   <% else  %>
     <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false } %>
   <% end %>

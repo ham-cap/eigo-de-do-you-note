@@ -4,6 +4,6 @@ FactoryBot.define do
     email { "user1@example.com" }
     provider { "google_oauth2" }
     uid { SecureRandom.uuid }
-    image { "/app/assets/images/test_user_icon" }
+    image { "/app/assets/images/default_user_icon" }
   end
 end
