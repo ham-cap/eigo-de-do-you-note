@@ -70,8 +70,7 @@ class CardsController < ApplicationController
     params.require(:card).permit(
       :original_text,
       :ja_phrase,
-      :en_phrase,
-      :memorized_at
+      :en_phrase
     )
   end
 
