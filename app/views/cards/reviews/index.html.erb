@@ -4,7 +4,7 @@
 <div data-controller="review">
   <h1 class="font-bold text-xl md:text-3xl flex justify-center font-bold my-8">復習モード</h1>
   <% if @card.nil? %>
-    <%= render 'instruction_for_review' %>
+    <%= render 'instruction' %>
   <% else %>
     <div class="change-visibility-button my-4 flex justify-end">
       <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 items-center justify-center rounded-full bg-[#21cbca] hover:bg-[#1db5b4] px-6 font-semibold md:font-medium text-sm md:text-lg text-[#fafafa]">英文を表示</button>
