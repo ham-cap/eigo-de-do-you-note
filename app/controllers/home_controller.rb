@@ -4,9 +4,7 @@ class HomeController < ApplicationController
     redirect_to cards_path if current_user.present?
   end
 
-  def terms
-  end
+  def terms; end
 
-  def privacy
-  end
+  def privacy; end
 end
