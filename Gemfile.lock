@@ -106,6 +106,7 @@ GEM
       reline (>= 0.3.8)
     deepl-rb (3.2.0)
     diff-lcs (1.5.1)
+    docile (1.4.1)
     dockerfile-rails (1.7.6)
       rails (>= 3.0.0)
     dotenv (3.1.7)
@@ -357,6 +358,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -444,6 +451,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   rubocop-rspec
   selenium-webdriver
+  simplecov
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
