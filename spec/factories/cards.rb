@@ -5,11 +5,8 @@ FactoryBot.define do
     memorized_at { "2024-12-13 15:33:42" }
     association :user
 
-    trait :without_ja_phrase do
+    trait :without_any_phrases do
       ja_phrase { nil }
-    end
-
-    trait :without_en_phrase do
       en_phrase { nil }
     end
 
