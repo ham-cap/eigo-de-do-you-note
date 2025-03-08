@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Cards", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let!(:cards) { FactoryBot.create_list(:card, 3, user: user) }
+  let(:card_belonging_to_another_user) { FactoryBot.create(:card, :belonging_to_another_user) }
 
   before do
     log_in_as user
@@ -49,6 +50,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('Failure teaches success.', wait: 10)
   end
 
+  scenario 'a user fails to create a new card', :js do
+    visit cards_path
+    expect(page).to have_content 'フレーズ一覧'
+    find('.creation_icon').click
+    fill_in '翻訳したいフレーズ', with: ''
+    click_on '翻訳する'
+    expect(page).to have_content('フレーズを入力してください。', wait: 10)
+  end
+
   scenario 'a user deletes a card from show page', :js do
     visit card_path(cards[0])
     expect(page).to have_content cards[0].ja_phrase
@@ -76,7 +86,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content cards[0].en_phrase
   end
 
-  scenario 'a updates a card', :js do
+  scenario 'a user updates a card', :js do
     visit cards_path
     expect(page).to have_content "フレーズ一覧"
     click_on '編集する', match: :first
@@ -86,6 +96,16 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content 'カードを更新した'
     expect(page).to have_content 'Updated card'
+  end
+
+  scenario 'a user fails to update a card', :js do
+    visit cards_path
+    expect(page).to have_content "フレーズ一覧"
+    click_on '編集する', match: :first
+    fill_in 'card[ja_phrase]', with: ''
+    fill_in 'card[en_phrase]', with: ''
+    click_on '更新する'
+    expect(page).to have_content('フレーズを入力してください。', wait: 15)
   end
 
   scenario 'a user reviews unmemorized cards in review mode', :js do
@@ -126,6 +146,19 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content '次のフレーズへ'
   end
 
+  scenario 'a user add a card to review mode by clicking a check button', :js do
+    card = FactoryBot.create(:card, user: user)
+    visit cards_path
+    expect(page).to have_content card.ja_phrase
+    expect(page).to have_content card.en_phrase
+    within "#card-#{card.id}" do
+      find('.memorized-button').click
+    end
+    visit review_cards_path
+    expect(page).to have_content '復習モード'
+    expect(page).to have_content card.ja_phrase
+  end
+
   scenario 'a user search for cards using incremental search', :js do
     card = FactoryBot.create(:card, :for_incremental_search_test, user: user)
     visit cards_path
@@ -161,5 +194,16 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_selector('.spinner', wait: 10)
     expect(page).to have_content('本日は晴天なり', wait: 10)
     expect(page).to have_content('testing a microphone', wait: 10)
+  end
+
+  scenario 'a user can\'t access the cards belonging to other users', :js do
+    visit card_path(card_belonging_to_another_user)
+    expect(page).to have_content('ActiveRecord::RecordNotFound in CardsController#show')
+  end
+
+  scenario 'user cannot access to card list before login', :js do
+    log_out
+    visit cards_path
+    expect(page).to have_content('ログインしてください')
   end
 end

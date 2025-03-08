@@ -5,5 +5,13 @@ FactoryBot.define do
     provider { "google_oauth2" }
     uid { SecureRandom.uuid }
     image { "/app/assets/images/default_user_icon" }
+
+    trait :another_user do
+      name { "User2" }
+      email { "user2@example.com" }
+      provider { "google_oauth2" }
+      uid { SecureRandom.uuid }
+      image { "/app/assets/images/default_user_icon" }
+    end
   end
 end
