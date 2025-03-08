@@ -40,12 +40,12 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
-    flash.now.notice = 'カードを削除しました'
 
     respond_to do |format|
       if params[:from_show]
         format.html { redirect_to cards_path, notice: 'カードを削除しました' }
       else
+        flash.now.notice = 'カードを削除しました'
         format.turbo_stream
       end
     end
