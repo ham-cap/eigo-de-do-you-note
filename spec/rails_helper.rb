@@ -67,5 +67,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include LoginSupport, type: :system
+  config.include SessionsSupport, type: :system
+  config.include ApplicationHelper, type: :helper
+  config.include SessionsHelper, type: :helper
 end

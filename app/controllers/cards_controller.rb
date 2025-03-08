@@ -1,7 +1,6 @@
 class CardsController < ApplicationController
   before_action :authenticate
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @target = params[:target] || 'all'
@@ -40,12 +39,12 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
-    flash.now.notice = 'カードを削除しました'
 
     respond_to do |format|
       if params[:from_show]
         format.html { redirect_to cards_path, notice: 'カードを削除しました' }
       else
+        flash.now.notice = 'カードを削除しました'
         format.turbo_stream
       end
     end
@@ -79,11 +78,5 @@ class CardsController < ApplicationController
 
   def set_card
     @card = current_user.cards.find(params[:id])
-  end
-
-  def authorize_user
-    unless @card.user_id == current_user.id
-      redirect_to cards_path, alert: 'アクセス権がありません'
-    end
   end
 end

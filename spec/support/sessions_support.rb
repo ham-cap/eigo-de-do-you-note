@@ -1,8 +1,5 @@
-module LoginSupport
+module SessionsSupport
   def log_in_as(user)
-    if page.has_selector?('.logout-button')
-      click_on 'ログアウト'
-    end
     OmniAuth.configure do |config|
       config.test_mode = true
       config.mock_auth[:google_oauth2] =
@@ -19,5 +16,9 @@ module LoginSupport
 
     visit root_path
     click_on 'Googleでログイン', match: :first
+  end
+
+  def log_out
+    visit log_out_path
   end
 end

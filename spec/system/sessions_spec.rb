@@ -3,12 +3,28 @@ require 'rails_helper'
 RSpec.describe "Sessions", type: :system do
   let(:user) { FactoryBot.create(:user) }
 
-  it 'a user log in', :js do
+  it 'user log in', :js do
     log_in_as user
     expect(page).to have_content 'ログインしました'
   end
 
-  it 'a user log out', :js do
+  it 'user fails to log in' do
+    OmniAuth.configure do |config|
+      config.test_mode = true
+      config.mock_auth[:google_oauth2] =
+        OmniAuth::AuthHash.new({
+                                 provider: '',
+                                 uid: '',
+                                 info: { name: '' }
+                               })
+    end
+    visit root_path
+    click_on 'Googleでログイン', match: :first
+
+    expect(page).to have_content 'ログインに失敗しました'
+  end
+
+  it 'user log out', :js do
     Capybara.using_session("another_session_in_sessions_spec") do
       log_in_as user
       expect(page).to have_content 'ログインしました'

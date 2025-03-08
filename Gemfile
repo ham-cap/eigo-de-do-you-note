@@ -74,6 +74,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'launchy'
+  gem 'simplecov'
 end
 
 gem 'dockerfile-rails', '>= 1.7', group: :development

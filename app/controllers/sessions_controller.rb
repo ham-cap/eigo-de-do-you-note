@@ -2,10 +2,13 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate
 
   def create
-    if (user = User.find_or_create_from_auth_hash(auth_hash))
+    user = User.find_or_new_from_auth_hash(auth_hash)
+    if user.save
       log_in user
+      redirect_to cards_path, notice: 'ログインしました'
+    else
+      redirect_to root_path, alert: 'ログインに失敗しました'
     end
-    redirect_to cards_path, notice: 'ログインしました'
   end
 
   def destroy

@@ -5,11 +5,8 @@ FactoryBot.define do
     memorized_at { "2024-12-13 15:33:42" }
     association :user
 
-    trait :without_ja_phrase do
+    trait :without_any_phrases do
       ja_phrase { nil }
-    end
-
-    trait :without_en_phrase do
       en_phrase { nil }
     end
 
@@ -42,6 +39,13 @@ FactoryBot.define do
       ja_phrase { 'カード一覧画面ではインクリメンタルサーチが使用できます。' }
       en_phrase { 'Incremental search is available on the card list screen.' }
       memorized_at { nil }
+    end
+
+    trait :belonging_to_another_user do
+      ja_phrase { '他のユーザーが作成したカードです' }
+      en_phrase { 'Cards created by other users.' }
+      memorized_at { nil }
+      association :user, factory: [:user, :another_user]
     end
   end
 end

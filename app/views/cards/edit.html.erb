@@ -13,6 +13,16 @@
           <%= form.text_area :en_phrase, class: 'h-[3rem] border border-gray-400 rounded-md' %>
         </div>
       </div>
+      <% if @card.errors[:base].any? %>
+        <div class="text-red-500"><%= @card.errors[:base].first %></div>
+      <% else %>
+        <% @card.errors.messages[:ja_phrase].each do |message| %>
+          <div class="text-red-500"><%= message %></div>
+        <% end %>
+        <% @card.errors.messages[:en_phrase].each do |message| %>
+          <div class="text-red-500"><%= message %></div>
+        <% end %>
+      <% end %>
       <div class="buttons flex flex-col space-y-2">
         <div class="submit-button w-full h-[2rem] flex justify-center border-2 border-solid border-[#aaaaaa] text-lg hover:bg-gray-100">
           <%= form.submit '更新する', class: "w-full h-full cursor-pointer" %>
