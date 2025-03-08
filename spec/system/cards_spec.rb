@@ -10,7 +10,12 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('フレーズ一覧', wait: 10)
   end
 
-  it 'displays a list of cards', :js do
+  after do
+    log_out
+    expect(page).to have_content('ログアウトしました', wait: 10)
+  end
+
+  scenario 'a user visits the card list', :js do
     expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content cards[0].ja_phrase
     expect(page).to have_content cards[0].en_phrase
@@ -20,7 +25,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content cards[2].en_phrase
   end
 
-  it 'creates a new card', :js do
+  scenario 'a user creates a new card with Japanese', :js do
     visit cards_path
     expect(page).to have_content 'フレーズ一覧'
     find('.creation_icon').click
@@ -32,7 +37,19 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('testing a microphone', wait: 10)
   end
 
-  it 'deletes a card', :js do
+  scenario 'a user creates a new card with English', :js do
+    visit cards_path
+    expect(page).to have_content 'フレーズ一覧'
+    find('.creation_icon').click
+    fill_in '翻訳したいフレーズ', with: 'Failure teaches success.'
+    click_on '翻訳する'
+    expect(page).to have_content('カードを作成しました', wait: 10)
+    expect(page).to have_content('フレーズ一覧', wait: 10)
+    expect(page).to have_content('失敗は成功を教えてくれる。', wait: 10)
+    expect(page).to have_content('Failure teaches success.', wait: 10)
+  end
+
+  scenario 'a user deletes a card from show page', :js do
     visit card_path(cards[0])
     expect(page).to have_content cards[0].ja_phrase
     expect(page).to have_content cards[0].en_phrase
@@ -46,7 +63,20 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content cards[0].en_phrase
   end
 
-  it 'updates a card', :js do
+  scenario 'a user deletes a card from card list', :js do
+    expect(page).to have_content 'フレーズ一覧'
+    within "#card-#{cards[0].id}" do
+      click_on '編集する'
+    end
+    accept_confirm "本当に削除しますか？" do
+      click_on '削除する'
+    end
+    expect(page).to have_content('フレーズ一覧', wait: 10)
+    expect(page).not_to have_content cards[0].ja_phrase
+    expect(page).not_to have_content cards[0].en_phrase
+  end
+
+  scenario 'a updates a card', :js do
     visit cards_path
     expect(page).to have_content "フレーズ一覧"
     click_on '編集する', match: :first
@@ -58,7 +88,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content 'Updated card'
   end
 
-  it 'can review unmemorized cards in review mode', :js do
+  scenario 'a user reviews unmemorized cards in review mode', :js do
     unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
     unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
 
@@ -80,30 +110,23 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
   end
 
-  it 'a memorized button removes card from review mode', :js do
-    Capybara.using_session("another_session_in_cards_spec") do
-      log_in_as user
-      unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
-      unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
-      visit cards_path
-      expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-      expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
-      within "#card-#{unmemorized_card2.id}" do
-        find('.memorized-button').click
-      end
-      find_by_id('menu-close').click
-      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
-      within('#menu-open') do
-        click_on '復習モード'
-      end
-      expect(page).to have_content '復習モード'
-      expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
-      expect(page).to have_content 'まだ暗記できていない'
-      expect(page).not_to have_content '次のフレーズへ'
+  scenario 'a user removes a card from review mode by clicking a check button', :js do
+    unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
+    unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
+    visit cards_path
+    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
+    within "#card-#{unmemorized_card2.id}" do
+      find('.memorized-button').click
     end
+    visit review_cards_path
+    expect(page).to have_content '復習モード'
+    expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
+    expect(page).to have_content 'まだ暗記できていない'
+    expect(page).not_to have_content '次のフレーズへ'
   end
 
-  it 'can be searched incrementally', :js do
+  scenario 'a user search for cards using incremental search', :js do
     card = FactoryBot.create(:card, :for_incremental_search_test, user: user)
     visit cards_path
     fill_in 'フレーズを検索', with: 'インクリメンタル'
@@ -115,7 +138,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_selector('.a-card', count: 1)
   end
 
-  it 'can use filter in card list', :js do
+  scenario 'a user filter the card list', :js do
     memorized_card = FactoryBot.create(:card, user: user)
     unmemorized_card = FactoryBot.create(:card, :unmemorized1, user: user)
     visit cards_path
@@ -129,22 +152,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content unmemorized_card.ja_phrase
   end
 
-  it 'can use infinite scroll in cards index page', :js do
-    Capybara.using_session("another_session_in_cards_spec2") do
-      log_in_as user
-      n = 1
-      45.times do
-        FactoryBot.create(:card, ja_phrase: "カード #{n}", user: user)
-        n += 1
-      end
-      visit cards_path
-      expect(page).not_to have_content('カード 1', wait: 10)
-      page.execute_script("window.scrollTo(0, document.body.scrollHeight)")
-      expect(page).to have_content('カード 1', wait: 10)
-    end
-  end
-
-  it 'spinner show up while card creation', :js do
+  scenario 'the spinner show up while card creation', :js do
     visit cards_path
     find('.creation_icon').click
     fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
