@@ -88,6 +88,6 @@ $ bin/dev
 
 ```
 $ cd eigo-de-do-you-note
-$ cp .envrc.example .envrc
-$ vi .envrc # GOOGLE_CLIENT_ID・GOOGLE_CLIENT_SECRET・DEEPL_API_KEYを追記
+$ cp .env.example .env
+$ vi .env # GOOGLE_CLIENT_ID・GOOGLE_CLIENT_SECRET・DEEPL_API_KEYを追記
 ```
