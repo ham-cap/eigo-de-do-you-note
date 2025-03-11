@@ -139,6 +139,7 @@ RSpec.describe "Cards", type: :system do
     within "#card-#{unmemorized_card2.id}" do
       find('.memorized-button').click
     end
+    visit current_path
     visit review_cards_path
     expect(page).to have_content '復習モード'
     expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
