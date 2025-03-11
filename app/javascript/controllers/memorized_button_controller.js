@@ -1,4 +1,4 @@
-import {Controller} from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="memorized-button"
 export default class extends Controller {
@@ -11,20 +11,20 @@ export default class extends Controller {
     ) {
       this.memorizedButtonTarget.innerHTML = "";
       this.memorizedButtonTarget.innerHTML =
-        '<img src="/assets/checked-box.png" alt="覚えた状態チェックマーク" class="unchecked w-6 h-6"><span class="inline-block ml-[1rem] font-semibold">覚えた！！</span>';
+        '<img src="/assets/checked-box.png" alt="覚えた状態チェックマーク" class="checked w-6 h-6"><span class="inline-block ml-[1rem] font-semibold">覚えた！！</span>';
       this.memorizedButtonTarget.classList.add(
         "bg-white",
         "rounded-md",
-        "hover:border-gray-500"
+        "hover:border-gray-500",
       );
     } else {
       this.memorizedButtonTarget.innerHTML = "";
       this.memorizedButtonTarget.innerHTML =
-        '<img src="/assets/unchecked-box.png" alt="覚えていない状態のチェックマーク" class="checked w-6 h-6"><span class="inline-block ml-[1rem] font-semibold">覚えた！！</span>';
+        '<img src="/assets/unchecked-box.png" alt="覚えていない状態のチェックマーク" class="unchecked w-6 h-6"><span class="inline-block ml-[1rem] font-semibold">覚えた！！</span>';
       this.memorizedButtonTarget.classList.add(
         "bg-white",
         "rounded-md",
-        "hover:border-gray-500"
+        "hover:border-gray-500",
       );
     }
   }
