@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="flex justify-center">
-      <div data-controller="memorized-button" class="memorized-button md:basis-1/4 flex flex-col justify-center w-1/2 h-[3rem] mb-4 rounded-md border border-gray-300 border-solid bg-white hover:border-gray-500 text-[#575555]">
+      <div data-controller="memorized-button" id="memorized-button" class="md:basis-1/4 flex flex-col justify-center w-1/2 h-[3rem] mb-4 rounded-md border border-gray-300 border-solid bg-white hover:border-gray-500 text-[#575555]">
         <%= button_to update_memorized_status_card_path(card),
                       method: :patch,
                       data: { memorized_button_target: 'memorizedButton', action: 'click->memorized-button#switchText' },

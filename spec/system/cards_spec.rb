@@ -130,34 +130,37 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
   end
 
-  scenario 'a user removes a card from review mode by clicking a check button', :js do
-    unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
-    unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
+  scenario 'a user checks a memorized card by clicking a check button', :js do
+    unmemorized_card = FactoryBot.create(:card, :unmemorized1, user: user)
     visit cards_path
-    expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
-    within "#card-#{unmemorized_card2.id}" do
-      find('.memorized-button').click
+    expect(page).to have_content unmemorized_card.ja_phrase
+    expect(page).to have_content unmemorized_card.en_phrase
+    within "#card-#{unmemorized_card.id}" do
+      find('#memorized-button').click
     end
-    visit current_path
-    visit review_cards_path
-    expect(page).to have_content '復習モード'
-    expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
-    expect(page).to have_content 'まだ暗記できていない'
-    expect(page).not_to have_content '次のフレーズへ'
+    within "#card-#{unmemorized_card.id}" do
+      expect(page).to have_selector('.checked')
+    end
+    within '.filters' do
+      click_on '覚えた'
+    end
+    expect(page).to have_content unmemorized_card.ja_phrase
+    expect(page).to have_content unmemorized_card.en_phrase
   end
 
-  scenario 'a user add a card to review mode by clicking a check button', :js do
+  scenario 'a user checks a forgotten card by clicking a check button', :js do
     card = FactoryBot.create(:card, user: user)
     visit cards_path
     expect(page).to have_content card.ja_phrase
     expect(page).to have_content card.en_phrase
     within "#card-#{card.id}" do
-      find('.memorized-button').click
+      find('#memorized-button').click
     end
-    visit review_cards_path
-    expect(page).to have_content '復習モード'
+    within '.filters' do
+      click_on '覚えていない'
+    end
     expect(page).to have_content card.ja_phrase
+    expect(page).to have_content card.en_phrase
   end
 
   scenario 'a user search for cards using incremental search', :js do
