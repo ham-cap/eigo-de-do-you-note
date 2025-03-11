@@ -137,6 +137,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content unmemorized_card.en_phrase
     within "#card-#{unmemorized_card.id}" do
       find('#memorized-button').click
+      expect(page).to have_selector('.checked')
     end
     page.refresh
     within '.filters' do
@@ -153,6 +154,7 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content card.en_phrase
     within "#card-#{card.id}" do
       find('#memorized-button').click
+      expect(page).to have_selector('.unchecked')
     end
     page.refresh
     within '.filters' do
