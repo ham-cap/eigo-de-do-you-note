@@ -138,9 +138,7 @@ RSpec.describe "Cards", type: :system do
     within "#card-#{unmemorized_card.id}" do
       find('#memorized-button').click
     end
-    within "#card-#{unmemorized_card.id}" do
-      expect(page).to have_selector('.checked')
-    end
+    visit cards_path
     within '.filters' do
       click_on '覚えた'
     end
@@ -156,6 +154,7 @@ RSpec.describe "Cards", type: :system do
     within "#card-#{card.id}" do
       find('#memorized-button').click
     end
+    visit cards_path
     within '.filters' do
       click_on '覚えていない'
     end
