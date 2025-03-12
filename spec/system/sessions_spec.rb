@@ -32,7 +32,8 @@ RSpec.describe "Sessions", type: :system do
       within "#menu-open" do
         click_on 'ログアウト'
       end
-      expect(page).to have_content '翻訳と記録を同時にしてくれるアプリです。'
+      expect(page).to have_content '翻訳と記録を同時にしてくれる'
+      expect(page).to have_content '英語フレーズ帳'
       expect(page).to have_content 'ログアウトしました'
     end
   end
