@@ -127,6 +127,7 @@ RSpec.describe "Cards", type: :system do
 
   scenario 'a user removes a card from review mode by clicking a check button', :js do
     Capybara.using_session("another_session_in_cards_spec") do
+      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
       log_in_as user
       expect(page).to have_content 'フレーズ一覧'
       unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
@@ -151,6 +152,7 @@ RSpec.describe "Cards", type: :system do
 
   scenario 'a user add a card to review mode by clicking a check button', :js do
     Capybara.using_session("another_session_in_cards_spec") do
+      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
       log_in_as user
       card = FactoryBot.create(:card, user: user)
       visit cards_path
