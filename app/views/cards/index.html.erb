@@ -2,25 +2,27 @@
 <% set_meta_tags description: '翻訳結果と原文をセットにしたカードの一覧を閲覧できます。' %>
 
 <div>
-  <h1 class="flex justify-center font-bold text-xl md:text-3xl my-8">フレーズ一覧</h1>
-  <nav class="w-3/5 my-4">
-    <ul data-controller="card-filter" class="filters flex justify-start">
-      <li class="a-filter is-selected flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] hover:bg-[#87faf9]" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+  <div class="bg-[#caeceb]">
+    <h1 class="block flex justify-center font-bold text-xl md:text-3xl my-8 mx-4">フレーズ一覧</h1>
+  </div>
+  <nav class="m-4 md:w-3/4 border border-[#b0b0b0] rounded-md">
+    <ul data-controller="card-filter" class="filters flex justify-start border-[#b0b0b0] divide-x divide-solid rounded-md">
+      <li class="a-filter is-selected flex items-center justify-center w-[35%] h-8 text-sm text-[#b0b0b0] hover:bg-[#87faf9]" id="filter-all" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to '全て', cards_path, class: 'flex justify-center items-center w-full h-full', data: { turbo_frame: "cards", turbo_params: { target: 'all' } } %>
       </li>
-      <li class="a-filter flex items-center justify-center w-[35%] mr-2 h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] text-[10px] md:text-base hover:bg-[#87faf9]" id="filter-memorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <li class="a-filter flex items-center justify-center w-[35%] h-8 text-[#b0b0b0] text-sm md:text-base hover:bg-[#87faf9]" id="filter-memorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to cards_path(target: 'memorized'), class: 'flex justify-center items-center w-full h-full', data: { turbo_frame: "cards", turbo_params: { target: 'memorized' } } do %>
           <i class="fa-solid fa-check fa-fw" style="color: #ffb74d;"></i>覚えた！
         <% end %>
       </li>
-      <li class="a-filter flex items-center justify-center w-[35%] h-8 rounded-full border border-[#b0b0b0] text-[#b0b0b0] text-[8px] md:text-base hover:bg-[#87faf9]" id="filter-unmemorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
+      <li class="a-filter flex items-center justify-center w-[35%] h-8 text-[#b0b0b0] text-sm md:text-base hover:bg-[#87faf9]" id="filter-unmemorized" data-card-filter-target="filterButton" data-action="click->card-filter#changeFilterDesign">
         <%= link_to cards_path(target: 'unmemorized'), class: 'flex justify-center items-center w-full h-full', data: { turbo_frame: "cards", turbo_params: { target: 'unmemorized' } } do %>
            <i class="fa-solid fa-check fa-fw"></i>覚えていない
          <% end %>
       </li>
     </ul>
   </nav>
-  <div class="search_form mb-8">
+  <div class="search_form mb-8 mx-4">
     <%= search_form_for(
         @search,
         html: {
@@ -30,13 +32,13 @@
             action: "input->search#submit"
           }
         }) do |f| %>
-      <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "text-[#5D6368]" %>
-      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "w-1/2 h-[2rem] border border-[#5D6368] placeholder:italic placeholder:text-gray-400 placeholder:text-xs placeholder:md:text-base", placeholder: "例: 思い立ったが吉日"%>
+      <%= f.label :ja_phrase_or_en_phrase_cont, "フレーズを検索", class: "block md:inline text-[#575555]" %>
+      <%= f.search_field :ja_phrase_or_en_phrase_cont, class: "search-field w-full md:w-1/2 h-[2rem] rounded-md placeholder:italic placeholder:text-gray-400 placeholder:text-xs placeholder:md:text-base", placeholder: "例: 思い立ったが吉日"%>
       <%= hidden_field_tag :target, @target %>
     <% end %>
   </div>
   <div data-controller="creation-form">
-    <div class="creation_icon w-16 h-16 md:w-20 md:h-20 mr-2 md:mr-0 rounded-full bg-white hover:bg-gray-200 z-10 fixed bottom-[50px] md:bottom-[70px] right-0 md:right-auto md:left-[calc(50%+theme(maxWidth.screen-md)/2-6rem)]" data-action="click->creation-form#changeVisibility">
+    <div class="creation_icon w-16 h-16 md:w-20 md:h-20 mr-2 md:mr-0 rounded-full bg-white hover:bg-gray-200 z-10 fixed bottom-[100px] md:bottom-[70px] right-0 md:right-auto md:left-[calc(50%+theme(maxWidth.screen-md)/2-6rem)]" data-action="click->creation-form#changeVisibility">
       <%= link_to image_tag('creation_icon.png', alt: '新規作成フォームを開くアイコン'), new_card_path, data: { turbo_frame: dom_id(Card.new) } %>
     </div>
     <div class="flex justify-center">
