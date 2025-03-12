@@ -41,3 +41,19 @@
 .search-field {
   border-color: #b0b0b0;
 }
+
+.header-dropdown {
+  width: 250px; /* w-[250px] */
+  height: auto; /* h-auto */
+  background-color: #ffffff; /* bg-white */
+  border-radius: 0.375rem; /* rounded-md */
+  border-width: 1px; /* border-2 */
+  border-style: solid;
+  border-color: #aaaaaa; /* デフォルトの境界線色 */
+}
+
+.header-dropdown > :not([hidden]) ~ :not([hidden]) {
+  border-top-width: 1px; /* divide-y-2 */
+  border-color: #b0b0b0; /* divide-[#b0b0b0] */
+  border-style: dashed; /* divide-dashed */
+}
