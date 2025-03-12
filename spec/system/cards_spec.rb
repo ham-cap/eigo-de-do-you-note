@@ -136,6 +136,7 @@ RSpec.describe "Cards", type: :system do
       within "#card-#{unmemorized_card2.id}" do
         find('#memorized-button').click
       end
+      expect(page).to have_selector('.checked')
       find_by_id('menu-close').click
       expect(page).to have_no_css('#menu-open.hidden', wait: 20)
       within('#menu-open') do
@@ -148,20 +149,24 @@ RSpec.describe "Cards", type: :system do
   end
 
   scenario 'a user add a card to review mode by clicking a check button', :js do
-    card = FactoryBot.create(:card, user: user)
-    visit cards_path
-    expect(page).to have_content card.ja_phrase
-    expect(page).to have_content card.en_phrase
-    within "#card-#{card.id}" do
-      find('#memorized-button').click
+    Capybara.using_session("another_session_in_cards_spec") do
+      log_in_as user
+      card = FactoryBot.create(:card, user: user)
+      visit cards_path
+      expect(page).to have_content card.ja_phrase
+      expect(page).to have_content card.en_phrase
+      within "#card-#{card.id}" do
+        find('#memorized-button').click
+      end
+      expect(page).to have_selector('.unchecked')
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      within('#menu-open') do
+        click_on '復習モード'
+      end
+      expect(page).to have_content '復習モード'
+      expect(page).to have_content card.ja_phrase
     end
-    find_by_id('menu-close').click
-    expect(page).to have_no_css('#menu-open.hidden', wait: 20)
-    within('#menu-open') do
-      click_on '復習モード'
-    end
-    expect(page).to have_content '復習モード'
-    expect(page).to have_content card.ja_phrase
   end
 
   scenario 'a user search for cards using incremental search', :js do
