@@ -128,6 +128,7 @@ RSpec.describe "Cards", type: :system do
   scenario 'a user removes a card from review mode by clicking a check button', :js do
     Capybara.using_session("another_session_in_cards_spec") do
       log_in_as user
+      expect(page).to have_content 'フレーズ一覧'
       unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
       unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
       visit cards_path
@@ -136,7 +137,7 @@ RSpec.describe "Cards", type: :system do
       within "#card-#{unmemorized_card2.id}" do
         find('#memorized-button').click
       end
-      expect(page).to have_selector('.checked')
+      expect(page).to have_selector('.checked', wait: 10)
       find_by_id('menu-close').click
       expect(page).to have_no_css('#menu-open.hidden', wait: 20)
       within('#menu-open') do
@@ -158,7 +159,7 @@ RSpec.describe "Cards", type: :system do
       within "#card-#{card.id}" do
         find('#memorized-button').click
       end
-      expect(page).to have_selector('.unchecked')
+      expect(page).to have_selector('.unchecked', wait: 10)
       find_by_id('menu-close').click
       expect(page).to have_no_css('#menu-open.hidden', wait: 20)
       within('#menu-open') do
