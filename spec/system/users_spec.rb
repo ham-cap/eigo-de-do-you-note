@@ -11,7 +11,8 @@ RSpec.describe "Users", type: :system do
       accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
         click_on '退会'
       end
-      expect(page).to have_content '翻訳と記録を同時にしてくれるアプリです。'
+      expect(page).to have_content '翻訳と記録を同時にしてくれる'
+      expect(page).to have_content '英語フレーズ帳'
       expect(page).to have_content '退会しました'
     end
   end
