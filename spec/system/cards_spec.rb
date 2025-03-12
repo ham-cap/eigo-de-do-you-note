@@ -11,11 +11,6 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content('フレーズ一覧', wait: 10)
   end
 
-  after do
-    log_out
-    expect(page).to have_content('ログアウトしました', wait: 10)
-  end
-
   scenario 'a user visits the card list', :js do
     expect(page).to have_content 'フレーズ一覧'
     expect(page).to have_content cards[0].ja_phrase
@@ -130,38 +125,51 @@ RSpec.describe "Cards", type: :system do
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'
   end
 
-  scenario 'a user checks a memorized card by clicking a check button', :js do
-    unmemorized_card = FactoryBot.create(:card, :unmemorized1, user: user)
-    visit cards_path
-    expect(page).to have_content unmemorized_card.ja_phrase
-    expect(page).to have_content unmemorized_card.en_phrase
-    within "#card-#{unmemorized_card.id}" do
-      find('#memorized-button').click
-      expect(page).to have_selector('.checked')
+  scenario 'a user removes a card from review mode by clicking a check button', :js do
+    Capybara.using_session("another_session_in_cards_spec") do
+      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
+      log_in_as user
+      expect(page).to have_content 'フレーズ一覧'
+      unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
+      unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
+      visit cards_path
+      expect(page).to have_content unmemorized_card2.ja_phrase
+      expect(page).to have_content unmemorized_card2.en_phrase
+      within "#card-#{unmemorized_card2.id}" do
+        find('#memorized-button').click
+      end
+      expect(page).to have_selector('.checked', wait: 10)
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      within('#menu-open') do
+        click_on '復習モード'
+      end
+      expect(page).to have_content '復習モード'
+      expect(page).not_to have_content unmemorized_card2.ja_phrase
+      expect(page).not_to have_content '次のフレーズへ'
     end
-    page.refresh
-    within '.filters' do
-      click_on '覚えた'
-    end
-    expect(page).to have_content unmemorized_card.ja_phrase
-    expect(page).to have_content unmemorized_card.en_phrase
   end
 
-  scenario 'a user checks a forgotten card by clicking a check button', :js do
-    card = FactoryBot.create(:card, user: user)
-    visit cards_path
-    expect(page).to have_content card.ja_phrase
-    expect(page).to have_content card.en_phrase
-    within "#card-#{card.id}" do
-      find('#memorized-button').click
-      expect(page).to have_selector('.unchecked')
+  scenario 'a user add a card to review mode by clicking a check button', :js do
+    Capybara.using_session("another_session_in_cards_spec") do
+      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
+      log_in_as user
+      card = FactoryBot.create(:card, user: user)
+      visit cards_path
+      expect(page).to have_content card.ja_phrase
+      expect(page).to have_content card.en_phrase
+      within "#card-#{card.id}" do
+        find('#memorized-button').click
+      end
+      expect(page).to have_selector('.unchecked', wait: 10)
+      find_by_id('menu-close').click
+      expect(page).to have_no_css('#menu-open.hidden', wait: 20)
+      within('#menu-open') do
+        click_on '復習モード'
+      end
+      expect(page).to have_content '復習モード'
+      expect(page).to have_content card.ja_phrase
     end
-    page.refresh
-    within '.filters' do
-      click_on '覚えていない'
-    end
-    expect(page).to have_content card.ja_phrase
-    expect(page).to have_content card.en_phrase
   end
 
   scenario 'a user search for cards using incremental search', :js do
