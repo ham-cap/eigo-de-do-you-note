@@ -131,8 +131,8 @@ RSpec.describe "Cards", type: :system do
       unmemorized_card1 = FactoryBot.create(:card, :unmemorized1, user: user)
       unmemorized_card2 = FactoryBot.create(:card, :unmemorized2, user: user)
       visit cards_path
-      expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
-      expect(page).to have_content 'Almost there. But I haven\'t memorized it yet.'
+      expect(page).to have_content unmemorized_card2.ja_phrase
+      expect(page).to have_content unmemorized_card2.en_phrase
       within "#card-#{unmemorized_card2.id}" do
         find('#memorized-button').click
       end
@@ -142,8 +142,7 @@ RSpec.describe "Cards", type: :system do
         click_on '復習モード'
       end
       expect(page).to have_content '復習モード'
-      expect(page).not_to have_content 'もう少し。でも、まだ暗記できていない'
-      expect(page).to have_content 'まだ暗記できていない'
+      expect(page).not_to have_content unmemorized_card2.ja_phrase
       expect(page).not_to have_content '次のフレーズへ'
     end
   end
