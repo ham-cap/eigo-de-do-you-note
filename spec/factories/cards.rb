@@ -40,12 +40,5 @@ FactoryBot.define do
       en_phrase { 'Incremental search is available on the card list screen.' }
       memorized_at { nil }
     end
-
-    trait :belonging_to_another_user do
-      ja_phrase { '他のユーザーが作成したカードです' }
-      en_phrase { 'Cards created by other users.' }
-      memorized_at { nil }
-      association :user, factory: [:user, :another_user]
-    end
   end
 end
