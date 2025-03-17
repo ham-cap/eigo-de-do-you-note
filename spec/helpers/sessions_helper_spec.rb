@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsHelper, type: :helper do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
   describe '#current_user' do
     it 'returns a user when the user has logged in' do
       log_in(user)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe '.find_or_new_auth_hash' do
     it 'returns the stored user if the user already exists' do

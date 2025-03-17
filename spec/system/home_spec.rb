@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Cards", type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe 'not logged in' do
     it 'visit terms page', :js do
