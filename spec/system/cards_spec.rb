@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Cards", type: :system do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
-  let!(:cards) { create_list(:card, 3, user: user) }
+  let!(:cards) { create_list(:card, 3, user:) }
   let(:card_belonging_to_another_user) { create(:card, user: another_user) }
 
   before do
@@ -105,8 +105,8 @@ RSpec.describe "Cards", type: :system do
   end
 
   scenario 'a user reviews unmemorized cards in review mode' do
-    unmemorized_card1 = create(:card, :unmemorized1, user: user)
-    unmemorized_card2 = create(:card, :unmemorized2, user: user)
+    unmemorized_card1 = create(:card, :unmemorized1, user:)
+    unmemorized_card2 = create(:card, :unmemorized2, user:)
 
     visit review_cards_path
     expect(page).to have_content '復習モード'
@@ -127,54 +127,48 @@ RSpec.describe "Cards", type: :system do
   end
 
   scenario 'a user removes a card from review mode by clicking a check button' do
-    Capybara.using_session("another_session_in_cards_spec") do
-      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
-      log_in_as user
-      expect(page).to have_content 'フレーズ一覧'
-      unmemorized_card1 = create(:card, :unmemorized1, user: user)
-      unmemorized_card2 = create(:card, :unmemorized2, user: user)
-      visit cards_path
-      expect(page).to have_content unmemorized_card2.ja_phrase
-      expect(page).to have_content unmemorized_card2.en_phrase
-      within "#card-#{unmemorized_card2.id}" do
-        find('#memorized-button').click
-      end
-      expect(page).to have_selector('.checked', wait: 5)
-      find_by_id('menu-close').click
-      expect(page).to have_no_css('#menu-open.hidden', wait: 5)
-      within('#menu-open') do
-        click_on '復習モード'
-      end
-      expect(page).to have_content '復習モード'
-      expect(page).not_to have_content unmemorized_card2.ja_phrase
-      expect(page).not_to have_content '次のフレーズへ'
+    Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
+    expect(page).to have_content 'フレーズ一覧'
+    unmemorized_card1 = create(:card, :unmemorized1, user:)
+    unmemorized_card2 = create(:card, :unmemorized2, user:)
+    visit cards_path
+    expect(page).to have_content unmemorized_card2.ja_phrase
+    expect(page).to have_content unmemorized_card2.en_phrase
+    within "#card-#{unmemorized_card2.id}" do
+      find('#memorized-button').click
     end
+    expect(page).to have_selector('.checked', wait: 5)
+    find_by_id('menu-close').click
+    expect(page).to have_no_css('#menu-open.hidden', wait: 5)
+    within('#menu-open') do
+      click_on '復習モード'
+    end
+    expect(page).to have_content '復習モード'
+    expect(page).not_to have_content unmemorized_card2.ja_phrase
+    expect(page).not_to have_content '次のフレーズへ'
   end
 
   scenario 'a user add a card to review mode by clicking a check button' do
-    Capybara.using_session("another_session_in_cards_spec") do
-      Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
-      log_in_as user
-      card = create(:card, user: user)
-      visit cards_path
-      expect(page).to have_content card.ja_phrase
-      expect(page).to have_content card.en_phrase
-      within "#card-#{card.id}" do
-        find('#memorized-button').click
-      end
-      expect(page).to have_selector('.unchecked', wait: 5)
-      find_by_id('menu-close').click
-      expect(page).to have_no_css('#menu-open.hidden', wait: 5)
-      within('#menu-open') do
-        click_on '復習モード'
-      end
-      expect(page).to have_content '復習モード'
-      expect(page).to have_content card.ja_phrase
+    Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
+    card = create(:card, user:)
+    visit cards_path
+    expect(page).to have_content card.ja_phrase
+    expect(page).to have_content card.en_phrase
+    within "#card-#{card.id}" do
+      find('#memorized-button').click
     end
+    expect(page).to have_selector('.unchecked', wait: 5)
+    find_by_id('menu-close').click
+    expect(page).to have_no_css('#menu-open.hidden', wait: 5)
+    within('#menu-open') do
+      click_on '復習モード'
+    end
+    expect(page).to have_content '復習モード'
+    expect(page).to have_content card.ja_phrase
   end
 
   scenario 'a user search for cards using incremental search' do
-    card = create(:card, :for_incremental_search_test, user: user)
+    card = create(:card, :for_incremental_search_test, user:)
     visit cards_path
     fill_in 'フレーズを検索', with: 'インクリメンタル'
     expect(page).to have_content 'カード一覧画面ではインクリメンタルサーチが使用できます。'
@@ -186,8 +180,8 @@ RSpec.describe "Cards", type: :system do
   end
 
   scenario 'a user filter the card list' do
-    memorized_card = create(:card, user: user)
-    unmemorized_card = create(:card, :unmemorized1, user: user)
+    memorized_card = create(:card, user:)
+    unmemorized_card = create(:card, :unmemorized1, user:)
     visit cards_path
     within '.filters' do
       click_on '覚えた'
