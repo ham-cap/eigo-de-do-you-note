@@ -16,18 +16,7 @@
       </div>
     </div>
     <%= turbo_frame_tag "memorized_button_#{card.id}" do %>
-      <div class="flex justify-center">
-        <div id="memorized-button" class="md:basis-1/4 flex flex-col justify-center w-1/2 h-[3rem] mb-4 rounded-md border border-gray-300 border-solid bg-white hover:border-gray-500 text-[#575555]">
-          <%= button_to update_memorization_status_card_path(card),
-                        method: :patch,
-                        data: { turbo_frame: "memorized_button_#{card.id}" },
-                        form: { class: "w-full h-full" },
-                        class: "flex justify-self-center justify-center w-full h-full items-center block text-xl md:text-lg" do %>
-            <%= card.memorized_at.nil? ? image_tag('unchecked-box.png', alt: '覚えていない状態のチェックマーク', class: 'unchecked w-6 h-6') : image_tag('checked-box.png', alt: '覚えた状態のチェックマーク', class: 'checked w-6 h-6') %>
-            <span class="inline-block ml-[1rem] font-semibold">覚えた！！</span>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'cards/memorization_status/memorized_button', card: %>
     <% end %>
   </div>
 <% end %>
