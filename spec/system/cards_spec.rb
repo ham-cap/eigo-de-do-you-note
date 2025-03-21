@@ -108,7 +108,7 @@ RSpec.describe "Cards", type: :system do
     unmemorized_card1 = create(:card, :unmemorized1, user:)
     unmemorized_card2 = create(:card, :unmemorized2, user:)
 
-    visit review_cards_path
+    visit review_path('first')
     expect(page).to have_content '復習モード'
     expect(page).to have_content 'もう少し。でも、まだ暗記できていない'
     expect(page).not_to have_content 'Almost there. But I haven\'t memorized it yet.'

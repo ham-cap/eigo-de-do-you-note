@@ -32,7 +32,7 @@
       <div class="w-[45%] md:w-1/4">
         <% if @previous_card %>
           <div class="previous-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] hover:bg-[#1db5b4] font-medium text-[#fafafa]">
-            <%= link_to review_cards_path(id: @previous_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
+            <%= link_to review_path(id: @previous_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
               <span><i class="fa-solid fa-angle-left"></i> 前のフレーズへ</span>
             <% end %>
           </div>
@@ -41,7 +41,7 @@
       <div class="w-[45%] md:w-1/4">
         <% if @next_card %>
           <div class="next-page inline-flex h-8 w-full items-center justify-center bg-[#21cbca] hover:bg-[#1db5b4] font-medium text-[#fafafa]">
-            <%= link_to review_cards_path(id: @next_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
+            <%= link_to review_path(id: @next_card.id), class: 'h-full w-full flex items-center justify-center px-6 text-xs md:text-base' do %>
               <span>次のフレーズへ <i class="fa-solid fa-angle-right"></i></span>
             <% end %>
           </div>
