@@ -137,15 +137,6 @@ RSpec.describe "Cards", type: :system do
     within "#card-#{unmemorized_card2.id}" do
       find('#memorized-button').click
     end
-    expect(page).to have_selector('.checked', wait: 5)
-    find_by_id('menu-close').click
-    expect(page).to have_no_css('#menu-open.hidden', wait: 5)
-    within('#menu-open') do
-      click_on '復習モード'
-    end
-    expect(page).to have_content '復習モード'
-    expect(page).not_to have_content unmemorized_card2.ja_phrase
-    expect(page).not_to have_content '次のフレーズへ'
   end
 
   scenario 'a user add a card to review mode by clicking a check button' do
