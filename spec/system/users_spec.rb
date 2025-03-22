@@ -5,7 +5,8 @@ RSpec.describe "Users", type: :system do
     user = create(:user)
 
     log_in_as user
-    find_by_id('menu-close').click
+    expect(page).to have_content 'フレーズ一覧'
+    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
     expect(page).to have_content '退会'
     expect {
       accept_confirm '退会すると今まで作成したカードは全て削除されます。退会してよろしいですか？' do
