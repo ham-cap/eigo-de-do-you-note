@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "memorized_button_#{@card.id}" do %>
+  <%= turbo_frame_tag "memorized_button_#{@card.id}" do %>
+    <%= render 'memorized_button', card: @card %>
+  <% end %>
+<% end %>
