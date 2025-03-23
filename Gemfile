@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 7.2.2'
 gem 'sprockets-rails'
-gem 'pg', '~> 1.1'
-gem 'puma', '>= 5.0'
+gem 'pg'
+gem 'puma'
 gem 'importmap-rails'
 gem 'turbo-rails'
 gem 'stimulus-rails'
@@ -32,7 +32,7 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'dockerfile-rails', '>= 1.7'
+  gem 'dockerfile-rails'
 end
 
 group :development do
