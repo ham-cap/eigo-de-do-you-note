@@ -15,7 +15,7 @@ class Card < ApplicationRecord
     def generate_a_translated_and_source_text_pair(original_text, user)
       source_language = CLD.detect_language(original_text)[:code]
       target_language = source_language == 'ja' ? 'EN' : 'JA'
-      translated_sentence = DeepL.translate(original_text, nil, target_language)
+      translated_sentence = DeepL.translate(original_text, nil, target_language) if original_text.present?
 
       if source_language == 'ja'
         user.cards.build(ja_phrase: original_text,
