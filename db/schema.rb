@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_19_101121) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_23_070316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_19_101121) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "image"
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   add_foreign_key "cards", "users"
