@@ -1,6 +1,6 @@
 <div class="header-dropdown">
   <%= link_to 'トップページ', cards_path, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4' %>
-  <%= link_to '復習モード', review_cards_path, data: { turbo_prefetch: false }, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4' %>
+  <%= link_to '復習モード', review_path('first'), data: { turbo_prefetch: false }, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4' %>
   <%= link_to '利用規約', terms_path, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4' %>
   <%= link_to 'プライバシーポリシー', privacy_path, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4' %>
   <%= link_to 'ログアウト', log_out_path, class: 'header-dropdown__item-link h-[3rem] flex items-center p-4', data: { turbo_prefetch: false } %>
