@@ -3,5 +3,43 @@
 
 <h1 class="text-2xl flex justify-center">新規作成</h1>
 <%= turbo_frame_tag @card do %>
-  <%= render 'form', card: @card %>
+  <div data-controller="spinner" class="w-full h-full flex justify-center">
+    <div data-spinner-target="form" class="bg-white h-full w-full md:w-2/3 rounded-md border-solid border-2 border-gray-500">
+      <%= form_with model: @card, class: "h-full flex flex-col" do |form| %>
+        <div class="divide-y-2 divide-[#b0b0b0] divide-dashed h-full">
+          <div class="form-label-container flex justify-center bg-[#caeceb] rounded-md">
+            <div class="form-label text-base md:text-2xl font-semibold text-center w-3/4 my-2">
+              <%= form.label :original_text, '翻訳したいフレーズを入力' %>
+            </div>
+          </div>
+          <div class="textarea-container flex justify-center pt-4">
+            <%= form.text_area :original_text, class: "w-5/6 placeholder:italic placeholder:text-gray-400 h-[12em] rounded-md", placeholder: "例: 思い立ったが吉日" %>
+          </div>
+        </div>
+        <% if @card.errors[:base].any? %>
+          <div class="text-red-500"><%= @card.errors[:base].first %></div>
+        <% else %>
+          <% @card.errors.messages[:ja_phrase].each do |message| %>
+            <div class="text-red-500"><%= message %></div>
+          <% end %>
+          <% @card.errors.messages[:en_phrase].each do |message| %>
+            <div class="text-red-500"><%= message %></div>
+          <% end %>
+        <% end %>
+        <div class="form-buttons grid justify-items-center h-full">
+          <div class="w-full flex justify-center items-center flex flex-col">
+            <div class="submit-button w-2/5 md:w-1/3 h-full mt-4 grid justify-items-center rounded-md border border-gray-500 bg-[#21cbca] hover:bg-[#1db5b4] text-[#fafafa]">
+              <%= form.submit '翻訳する', class: 'block w-full flex justify-center cursor-pointer text-lg md:text-xl' %>
+            </div>
+            <div data-action="click->creation-form#changeVisibility" class="cancel-button h-full flex items-center">
+              <%= link_to 'キャンセル', cards_path, class: 'w-full flex items-center justify-center text-gray-500 hover:underline md:text-lg' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div data-spinner-target="spinner" class="spinner bg-white h-64 md:h-80 w-full grid content-center rounded-lg border-solid border-2 border-gray-500">
+      <%= render 'spinner' %>
+    </div>
+  </div>
 <% end %>

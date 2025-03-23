@@ -19,5 +19,16 @@
   <p class="font-bold text-sm md:text-lg">
     まずは気になるフレーズを翻訳してみましょう！
   </p>
-  <%= render 'login_button_block' %>
+  <div class="w-3/5 md:w-1/3 my-4">
+    <%= button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: 'inline-block px-4 py-3 w-full rounded-full bg-[#ffb74d] text-[#575555] text-lg hover:bg-[#f79e1b]' %>
+  </div>
+  <div class="mb-8 text-xs md:text-sm">
+    <span>
+      <%= link_to '利用規約', terms_path, class: 'hover:underline' %>
+      ・
+      <%= link_to 'プライバシーポリシー', privacy_path, class: 'hover:underline' %>
+      に<br>
+      同意した上でログインしてください。
+    </span>
+  </div>
 </div>
