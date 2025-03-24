@@ -28,7 +28,7 @@ RSpec.describe "Sessions", type: :system do
     log_in_as user
     expect(page).to have_content 'ログインしました'
     find_by_id('menu-close').click
-    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
+    execute_script("document.querySelector('#menu-open').click()")
     within "#menu-open" do
       click_on 'ログアウト'
     end
