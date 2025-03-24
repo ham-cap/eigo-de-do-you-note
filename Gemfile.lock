@@ -134,6 +134,8 @@ GEM
     ffi (1.17.1-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hanmoto (0.7.0)
+      rails (>= 6.1.0)
     hashie (5.0.0)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
@@ -431,6 +433,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.7)
   dotenv-rails
   factory_bot_rails
+  hanmoto
   importmap-rails
   kaminari
   launchy

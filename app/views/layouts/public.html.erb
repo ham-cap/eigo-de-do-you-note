@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %> | 英語でどういう？ノート</title>
+    <%= favicon_link_tag '/favicon.ico' %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

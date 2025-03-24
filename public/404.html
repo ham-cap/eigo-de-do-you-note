@@ -1,49 +1,17 @@
-<!doctype html>
+<!-- BEGIN app/views/layouts/public.html.erb --><!DOCTYPE html>
 <html>
   <head>
-    <title>ページが見つかりませんでした</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-      body {
-        max-width: 640px;
-        margin: 0 auto;
-        height: 100vh;
-        color: #575555;
-      }
-
-      h1 {
-        text-align: center;
-      }
-
-      p {
-        text-align: center;
-      }
-
-      .link-to-top {
-        text-align: center;
-      }
-
-      a {
-        color: #575555;
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
+    <title>Not Found | 英語でどういう？ノート</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/application-cd391a48b9c7e73644cc4885425fa71e3ee7c8789de022536de91a8009b84ee7.css" media="all" data-turbo-track="reload" />
   </head>
-
   <body>
-    <!-- This file lives in public/404.html -->
-    <div class="container">
-      <div>
-        <h1>404 Not Found</h1>
-        <p>ご指定のページが見つかりませんでした。</p>
-        <div class="link-to-top">
-          <a href="/">トップページへ戻る</a>
-        </div>
-      </div>
-    </div>
+    <!-- BEGIN app/views/public_pages/404.html.erb --><div class="public-error-page">
+  <h1>404 Not Found</h1>
+  <p>ご指定のページが見つかりませんでした。</p>
+  <p><a href="/">トップページへ戻る</a></p>
+</div>
+<!-- END app/views/public_pages/404.html.erb -->
   </body>
 </html>
+<!-- END app/views/layouts/public.html.erb -->

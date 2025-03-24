@@ -43,17 +43,38 @@
 }
 
 .header-dropdown {
-  width: 250px; /* w-[250px] */
-  height: auto; /* h-auto */
-  background-color: #ffffff; /* bg-white */
-  border-radius: 0.375rem; /* rounded-md */
-  border-width: 1px; /* border-2 */
+  width: 250px;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 0.375rem;
+  border-width: 1px;
   border-style: solid;
-  border-color: #aaaaaa; /* デフォルトの境界線色 */
+  border-color: #aaaaaa;
 }
 
 .header-dropdown > :not([hidden]) ~ :not([hidden]) {
-  border-top-width: 1px; /* divide-y-2 */
-  border-color: #b0b0b0; /* divide-[#b0b0b0] */
-  border-style: dashed; /* divide-dashed */
+  border-top-width: 1px;
+  border-color: #b0b0b0;
+  border-style: dashed;
+}
+
+.public-error-page {
+  max-width: 640px;
+  margin: 0 auto;
+  height: 100vh;
+  color: #575555;
+}
+
+.public-error-page h1,
+.public-error-page p {
+  text-align: center;
+}
+
+.public-error-page a {
+  color: #575555;
+  text-decoration: none;
+}
+
+.public-error-page a:hover {
+  text-decoration: underline;
 }
