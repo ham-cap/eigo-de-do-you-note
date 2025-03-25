@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :provider, presence: true
-  validates :uid, presence: true
+  validates :uid, presence: true, uniqueness: { scope: :provider }
+  validates :email, presence: true
 
   class << self
     def find_or_new_from_auth_hash(auth_hash)
