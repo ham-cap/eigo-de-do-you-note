@@ -428,7 +428,7 @@ DEPENDENCIES
   cld
   debug
   deepl-rb
-  dockerfile-rails (>= 1.7)
+  dockerfile-rails
   dotenv-rails
   factory_bot_rails
   importmap-rails
@@ -437,8 +437,8 @@ DEPENDENCIES
   meta-tags
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
-  pg (~> 1.1)
-  puma (>= 5.0)
+  pg
+  puma
   rails (~> 7.2.2)
   rails-i18n
   ransack
