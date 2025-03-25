@@ -1,0 +1,7 @@
+<% unless Rails.env.production? %>
+User-Agent: *
+Disallow: /
+Allow: /$
+Allow: /privacy$
+Allow: /terms$
+<% end %>

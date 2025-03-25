@@ -31,6 +31,11 @@
 !/tmp/storage/.keep
 
 /public/assets
+/public/404.html
+/public/406-unsupported-browser.html
+/public/422.html
+/public/500.html
+/public/robots.txt
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

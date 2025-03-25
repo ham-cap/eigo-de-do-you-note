@@ -19,6 +19,7 @@ gem 'meta-tags'
 gem 'dotenv-rails'
 gem 'tzinfo-data', platforms: %i[ windows jruby ]
 gem 'bootsnap'
+gem 'hanmoto'
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
