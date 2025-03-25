@@ -16,12 +16,12 @@ module ApplicationHelper
         site_name: '英語でどういう？ノート',
         description: :description,
         image: image_url('ogp.png'),
-        url: 'https://do-you-know-the-phrase.com',
+        url: 'https://do-you-know-the-phrase.fly.dev',
         local: 'ja-JP'
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@lfax8dSjEK1wmvy'
+        site: '@ham_cap93'
       }
     }
   end
