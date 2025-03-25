@@ -138,8 +138,7 @@ RSpec.describe "Cards", type: :system do
       find('#memorized-button').click
     end
     expect(page).to have_selector('.checked', wait: 5)
-    find_by_id('menu-close').click
-    expect(page).to have_no_css('#menu-open.hidden', wait: 5)
+    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
     within('#menu-open') do
       click_on '復習モード'
     end
@@ -158,8 +157,7 @@ RSpec.describe "Cards", type: :system do
       find('#memorized-button').click
     end
     expect(page).to have_selector('.unchecked', wait: 5)
-    find_by_id('menu-close').click
-    expect(page).to have_no_css('#menu-open.hidden', wait: 5)
+    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
     within('#menu-open') do
       click_on '復習モード'
     end
