@@ -2,14 +2,14 @@
 <% set_meta_tags description: '記録しておいたカードのうち、まだ覚えていないカードをまとめて復習できます。' %>
 
 <div data-controller="review">
-  <h1 class="font-bold text-xl md:text-3xl flex justify-center font-bold my-8">復習モード</h1>
+  <h1 class="font-bold text-xl md:text-3xl flex justify-center font-bold my-8 bg-[#caeceb]">復習モード</h1>
   <% if @card.nil? %>
     <%= render 'instruction' %>
   <% else %>
     <div class="change-visibility-button my-4 flex justify-end">
-      <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 items-center justify-center rounded-full bg-[#21cbca] hover:bg-[#1db5b4] px-6 font-semibold md:font-medium text-sm md:text-lg text-[#fafafa]">英文を表示</button>
+      <button data-review-target="switchingButton" data-action="click->review#switchEnPhraseVisibility" class="inline-flex h-[3rem] w-32 md:w-36 mr-4 items-center justify-center rounded-full bg-[#21cbca] hover:bg-[#1db5b4] px-6 font-semibold md:font-medium text-sm md:text-lg text-[#fafafa]">英文を表示</button>
     </div>
-    <div id="card-<%= @card.id %>" class="h-full flex flex-col items-center mb-4">
+    <div id="card-<%= @card.id %>" class="h-full flex flex-col items-center mb-4 mx-4">
       <div class="a-card-container h-full flex flex-col w-full md:w-4/5">
         <div class="a-card h-24 h-full w-full flex justify-between border-2 border-solid border-[#aaaaaa] rounded-md mb-2">
           <div class="phrase-pair h-full w-full grid justify-items-center divide-y-2 divide-[#b0b0b0] divide-dashed">
