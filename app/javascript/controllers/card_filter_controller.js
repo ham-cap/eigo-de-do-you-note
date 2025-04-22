@@ -8,7 +8,7 @@ export default class extends Controller {
     if (!event.currentTarget.classList.contains("is-selected")) {
       event.currentTarget.classList.add("is-selected");
       const unclickedButtons = this.filterButtonTargets.filter(
-        (target) => target !== event.currentTarget
+        (target) => target !== event.currentTarget,
       );
       unclickedButtons.map((button) => button.classList.remove("is-selected"));
     }
