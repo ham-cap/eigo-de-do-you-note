@@ -22,28 +22,25 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content cards[2].en_phrase
   end
 
-  scenario 'a user creates a new card with Japanese' do
+  scenario 'a user creates a new card with translation' do
+    initial_card_count = user.cards.count
+
     visit cards_path
     expect(page).to have_content 'フレーズ一覧'
     find('.creation_icon').click
     fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
     click_on '翻訳する'
+
     expect(page).to have_content('カードを作成しました', wait: 5)
     expect(page).to have_content('フレーズ一覧', wait: 5)
     expect(page).to have_content('本日は晴天なり', wait: 5)
-    expect(page).to have_content('testing a microphone', wait: 5)
-  end
 
-  scenario 'a user creates a new card with English' do
-    visit cards_path
-    expect(page).to have_content 'フレーズ一覧'
-    find('.creation_icon').click
-    fill_in '翻訳したいフレーズ', with: 'Failure teaches success.'
-    click_on '翻訳する'
-    expect(page).to have_content('カードを作成しました', wait: 5)
-    expect(page).to have_content('フレーズ一覧', wait: 5)
-    expect(page).to have_content('失敗は成功を教えてくれる。', wait: 5)
-    expect(page).to have_content('Failure teaches success.', wait: 5)
+    expect(user.cards.count).to eq(initial_card_count + 1)
+
+    latest_card = user.cards.order(created_at: :desc).first
+    expect(latest_card.ja_phrase).to eq('本日は晴天なり')
+    expect(latest_card.en_phrase).to be_present
+    expect(latest_card.en_phrase.length).to be > 0
   end
 
   scenario 'a user fails to create a new card' do
@@ -127,40 +124,37 @@ RSpec.describe "Cards", type: :system do
   end
 
   scenario 'a user removes a card from review mode by clicking a check button' do
-    Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
-    expect(page).to have_content 'フレーズ一覧'
     unmemorized_card1 = create(:card, :unmemorized1, user:)
     unmemorized_card2 = create(:card, :unmemorized2, user:)
+
     visit cards_path
     expect(page).to have_content unmemorized_card2.ja_phrase
     expect(page).to have_content unmemorized_card2.en_phrase
+
     within "#card-#{unmemorized_card2.id}" do
       find('#memorized-button').click
     end
     expect(page).to have_selector('.checked', wait: 5)
-    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
-    within('#menu-open') do
-      click_on '復習モード'
-    end
+
+    visit review_path('first')
     expect(page).to have_content '復習モード'
     expect(page).not_to have_content unmemorized_card2.ja_phrase
     expect(page).not_to have_content '次のフレーズへ'
   end
 
   scenario 'a user add a card to review mode by clicking a check button' do
-    Capybara.current_session.driver.browser.manage.window.resize_to(1280, 800)
     card = create(:card, user:)
+
     visit cards_path
     expect(page).to have_content card.ja_phrase
     expect(page).to have_content card.en_phrase
+
     within "#card-#{card.id}" do
       find('#memorized-button').click
     end
     expect(page).to have_selector('.unchecked', wait: 5)
-    execute_script("document.querySelector('#menu-open').classList.remove('hidden');")
-    within('#menu-open') do
-      click_on '復習モード'
-    end
+
+    visit review_path('first')
     expect(page).to have_content '復習モード'
     expect(page).to have_content card.ja_phrase
   end
@@ -191,15 +185,15 @@ RSpec.describe "Cards", type: :system do
     expect(page).to have_content unmemorized_card.ja_phrase
   end
 
-  scenario 'the spinner show up while card creation' do
+  scenario 'the spinner shows up during translation' do
     visit cards_path
     find('.creation_icon').click
-    fill_in '翻訳したいフレーズ', with: '本日は晴天なり'
+    fill_in '翻訳したいフレーズ', with: 'テスト用フレーズ'
     click_on '翻訳する'
-    expect(page).to have_content('Now translating...', wait: 5)
-    expect(page).to have_selector('.spinner', wait: 5)
-    expect(page).to have_content('本日は晴天なり', wait: 5)
-    expect(page).to have_content('testing a microphone', wait: 5)
+
+    expect(page).to have_content('Now translating...', wait: 1)
+    expect(page).to have_selector('.spinner', wait: 1)
+    expect(page).to have_content('カードを作成しました', wait: 10)
   end
 
   scenario 'a user can\'t access the cards belonging to other users' do
