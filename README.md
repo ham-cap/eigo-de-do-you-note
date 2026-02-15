@@ -57,8 +57,8 @@ https://eigo-de-do-you-note.fly.dev
 
 ## 開発環境
 
-- Ruby 3.3.5
-- Ruby on Rails 7.2.2
+- Ruby 3.4.6
+- Ruby on Rails 8.1.2
 - Hotwire
 
 ## 開発時のセットアップ・起動
